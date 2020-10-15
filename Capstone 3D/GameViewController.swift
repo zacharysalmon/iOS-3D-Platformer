@@ -49,6 +49,8 @@ class GameViewController: UIViewController
 //	let obstacle_distance_buffer: Float = 80.0
 	
 //	var coins: Coins
+	var yellow_coin: Coin!
+	var red_coin: Coin!
 	var yellow_coin_node: SCNNode!
 	var red_coin_node: SCNNode!
 	var yellow_coins: SCNNode!
@@ -173,8 +175,12 @@ class GameViewController: UIViewController
 		yellow_coins = scene.rootNode.childNode(withName: "yellow_coins", recursively: true)!
 		yellow_coin_node = scene.rootNode.childNode(withName: "yellow_coin", recursively: true)!
 		
+		yellow_coin = Coin(coin_node: yellow_coin_node, coin_color: "yellow")
+		
 		red_coins = scene.rootNode.childNode(withName: "red_coins", recursively: true)!
 		red_coin_node = scene.rootNode.childNode(withName: "red_coin", recursively: true)!
+		
+		red_coin = Coin(coin_node: yellow_coin_node, coin_color: "red")
 		placeCoins()
 		
 //		player_related = scene.rootNode.childNode(withName: "player_related", recursively: true)!
@@ -348,7 +354,6 @@ class GameViewController: UIViewController
 		jump_count += 1
 		if jump_count % 3 == 0
 		{
-			print("updating")
 			updateLevel()
 		}
 	}
@@ -418,14 +423,16 @@ class GameViewController: UIViewController
 	{
 		while yellow_coins.childNodes.count < 5
 		{
-			yellow_coins.addChildNode(yellow_coin_node.clone())
+			let yellow_clone = Coin(coin_node: yellow_coin_node.clone(), coin_color: "yellow")
+			yellow_coins.addChildNode(yellow_clone.getCoinNode())
 		}
 //		print(yellow_coins.childNodes)
 
 		if red_coins.childNodes.count < 1
 		{
 			print("Adding red coin")
-			red_coins.addChildNode(red_coin_node.clone())
+			let red_clone = Coin(coin_node: red_coin_node.clone(), coin_color: "red")
+			red_coins.addChildNode(red_clone.getCoinNode())
 		}
 //		print(red_coins.childNodes)
 

@@ -11,7 +11,7 @@
 		38097DE324F426D4003ABDFF /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38097DE124F426D4003ABDFF /* TableViewCell.xib */; };
 		380DFC8225364740004A56CF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380DFC8125364740004A56CF /* Player.swift */; };
 		380DFC8D25369A21004A56CF /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380DFC8C25369A21004A56CF /* Track.swift */; };
-		380DFC952537460D004A56CF /* Coins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380DFC942537460D004A56CF /* Coins.swift */; };
+		380DFC952537460D004A56CF /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380DFC942537460D004A56CF /* Coin.swift */; };
 		381A135824B6677F00774855 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A135724B6677F00774855 /* AppDelegate.swift */; };
 		381A135C24B6677F00774855 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A135B24B6677F00774855 /* GameViewController.swift */; };
 		381A135F24B6677F00774855 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 381A135D24B6677F00774855 /* Main.storyboard */; };
@@ -53,7 +53,7 @@
 		38097DE124F426D4003ABDFF /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		380DFC8125364740004A56CF /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		380DFC8C25369A21004A56CF /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
-		380DFC942537460D004A56CF /* Coins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coins.swift; sourceTree = "<group>"; };
+		380DFC942537460D004A56CF /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		381A135424B6677F00774855 /* Capstone 3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capstone 3D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		381A135724B6677F00774855 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		381A135B24B6677F00774855 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 				381A135724B6677F00774855 /* AppDelegate.swift */,
 				381A135B24B6677F00774855 /* GameViewController.swift */,
 				380DFC8C25369A21004A56CF /* Track.swift */,
-				380DFC942537460D004A56CF /* Coins.swift */,
+				380DFC942537460D004A56CF /* Coin.swift */,
 				38214DD324F02F0700503FBB /* Leaderboard.swift */,
 				380DFC8125364740004A56CF /* Player.swift */,
 				38097DE024F426D4003ABDFF /* TableViewCell.swift */,
@@ -319,7 +319,7 @@
 				3842D33C24D866EF00839E24 /* OverlayScene.swift in Sources */,
 				386CCC9A24DC9392005113BD /* MainMenu.swift in Sources */,
 				38097DE224F426D4003ABDFF /* TableViewCell.swift in Sources */,
-				380DFC952537460D004A56CF /* Coins.swift in Sources */,
+				380DFC952537460D004A56CF /* Coin.swift in Sources */,
 				381A135C24B6677F00774855 /* GameViewController.swift in Sources */,
 				380DFC8225364740004A56CF /* Player.swift in Sources */,
 				381A135824B6677F00774855 /* AppDelegate.swift in Sources */,
