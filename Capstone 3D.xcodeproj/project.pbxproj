@@ -1,0 +1,683 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		38097DE224F426D4003ABDFF /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38097DE024F426D4003ABDFF /* TableViewCell.swift */; };
+		38097DE324F426D4003ABDFF /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38097DE124F426D4003ABDFF /* TableViewCell.xib */; };
+		380DFC8225364740004A56CF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380DFC8125364740004A56CF /* Player.swift */; };
+		380DFC8D25369A21004A56CF /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380DFC8C25369A21004A56CF /* Track.swift */; };
+		380DFC952537460D004A56CF /* Coins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380DFC942537460D004A56CF /* Coins.swift */; };
+		381A135824B6677F00774855 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A135724B6677F00774855 /* AppDelegate.swift */; };
+		381A135C24B6677F00774855 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A135B24B6677F00774855 /* GameViewController.swift */; };
+		381A135F24B6677F00774855 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 381A135D24B6677F00774855 /* Main.storyboard */; };
+		381A136124B6678300774855 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 381A136024B6678300774855 /* Assets.xcassets */; };
+		381A136424B6678300774855 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 381A136224B6678300774855 /* LaunchScreen.storyboard */; };
+		381A138824B668CD00774855 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 381A138724B668CD00774855 /* art.scnassets */; };
+		38214DD424F02F0700503FBB /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38214DD324F02F0700503FBB /* Leaderboard.swift */; };
+		3842D33C24D866EF00839E24 /* OverlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3842D33B24D866EF00839E24 /* OverlayScene.swift */; };
+		386CCC9824DB5612005113BD /* PauseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386CCC9724DB5612005113BD /* PauseMenu.swift */; };
+		386CCC9A24DC9392005113BD /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386CCC9924DC9392005113BD /* MainMenu.swift */; };
+		38CD81FC24E5D7F900E43D2E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38CD81FA24E5D7F900E43D2E /* Info.plist */; };
+		38CD81FD24E5D7F900E43D2E /* Capstone 3DUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CD81FB24E5D7F900E43D2E /* Capstone 3DUITests.swift */; };
+		38DC5BD9251E4DB900B12540 /* GameOverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DC5BD8251E4DB900B12540 /* GameOverMenu.swift */; };
+		38E57E01251A84E60046ED51 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38214DCF24EDD18400503FBB /* CloudKit.framework */; };
+		38E57E06251A84E90046ED51 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38214DD124EDD26800503FBB /* GameKit.framework */; };
+		38E6753E24B8AFA7006A21A0 /* MotionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E6753D24B8AFA7006A21A0 /* MotionHelper.swift */; };
+		38E6754124B8B120006A21A0 /* VectorOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E6754024B8B120006A21A0 /* VectorOperations.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		381A136B24B6678400774855 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 381A134C24B6677F00774855 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 381A135324B6677F00774855;
+			remoteInfo = HitTheTree;
+		};
+		381A137624B6678400774855 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 381A134C24B6677F00774855 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 381A135324B6677F00774855;
+			remoteInfo = HitTheTree;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		38097DE024F426D4003ABDFF /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		38097DE124F426D4003ABDFF /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		380DFC8125364740004A56CF /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		380DFC8C25369A21004A56CF /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		380DFC942537460D004A56CF /* Coins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coins.swift; sourceTree = "<group>"; };
+		381A135424B6677F00774855 /* Capstone 3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capstone 3D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		381A135724B6677F00774855 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		381A135B24B6677F00774855 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		381A135E24B6677F00774855 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		381A136024B6678300774855 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		381A136324B6678300774855 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		381A136524B6678300774855 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		381A136A24B6678400774855 /* Capstone 3DTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Capstone 3DTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		381A137524B6678400774855 /* Capstone 3DUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Capstone 3DUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		381A138724B668CD00774855 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		38214DCE24EDD13100503FBB /* Capstone 3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Capstone 3D.entitlements"; sourceTree = "<group>"; };
+		38214DCF24EDD18400503FBB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		38214DD124EDD26800503FBB /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		38214DD324F02F0700503FBB /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
+		3842D33B24D866EF00839E24 /* OverlayScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayScene.swift; sourceTree = "<group>"; };
+		3842EE3D24EDB34A00053A13 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
+		386CCC9724DB5612005113BD /* PauseMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseMenu.swift; sourceTree = "<group>"; };
+		386CCC9924DC9392005113BD /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		38CD81FA24E5D7F900E43D2E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38CD81FB24E5D7F900E43D2E /* Capstone 3DUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Capstone 3DUITests.swift"; sourceTree = "<group>"; };
+		38DC5BD8251E4DB900B12540 /* GameOverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverMenu.swift; sourceTree = "<group>"; };
+		38E6753D24B8AFA7006A21A0 /* MotionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionHelper.swift; sourceTree = "<group>"; };
+		38E6754024B8B120006A21A0 /* VectorOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorOperations.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		381A135124B6677F00774855 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38E57E01251A84E60046ED51 /* CloudKit.framework in Frameworks */,
+				38E57E06251A84E90046ED51 /* GameKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		381A136724B6678400774855 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		381A137224B6678400774855 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		381A134B24B6677F00774855 = {
+			isa = PBXGroup;
+			children = (
+				381A135624B6677F00774855 /* Capstone 3D */,
+				381A135524B6677F00774855 /* Products */,
+				38CD81F824E5D7C900E43D2E /* Capstone 3DUITests */,
+				3842EE3C24EDB34A00053A13 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		381A135524B6677F00774855 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				381A135424B6677F00774855 /* Capstone 3D.app */,
+				381A136A24B6678400774855 /* Capstone 3DTests.xctest */,
+				381A137524B6678400774855 /* Capstone 3DUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		381A135624B6677F00774855 /* Capstone 3D */ = {
+			isa = PBXGroup;
+			children = (
+				38214DCE24EDD13100503FBB /* Capstone 3D.entitlements */,
+				38E6753C24B8AF8E006A21A0 /* Helper */,
+				381A138724B668CD00774855 /* art.scnassets */,
+				381A135724B6677F00774855 /* AppDelegate.swift */,
+				381A135B24B6677F00774855 /* GameViewController.swift */,
+				380DFC8C25369A21004A56CF /* Track.swift */,
+				380DFC942537460D004A56CF /* Coins.swift */,
+				38214DD324F02F0700503FBB /* Leaderboard.swift */,
+				380DFC8125364740004A56CF /* Player.swift */,
+				38097DE024F426D4003ABDFF /* TableViewCell.swift */,
+				38097DE124F426D4003ABDFF /* TableViewCell.xib */,
+				3842D33B24D866EF00839E24 /* OverlayScene.swift */,
+				381A135D24B6677F00774855 /* Main.storyboard */,
+				38DC5BD8251E4DB900B12540 /* GameOverMenu.swift */,
+				386CCC9924DC9392005113BD /* MainMenu.swift */,
+				381A136024B6678300774855 /* Assets.xcassets */,
+				381A136224B6678300774855 /* LaunchScreen.storyboard */,
+				381A136524B6678300774855 /* Info.plist */,
+				386CCC9724DB5612005113BD /* PauseMenu.swift */,
+			);
+			path = "Capstone 3D";
+			sourceTree = "<group>";
+		};
+		3842EE3C24EDB34A00053A13 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				38214DD124EDD26800503FBB /* GameKit.framework */,
+				38214DCF24EDD18400503FBB /* CloudKit.framework */,
+				3842EE3D24EDB34A00053A13 /* HomeKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		38CD81F824E5D7C900E43D2E /* Capstone 3DUITests */ = {
+			isa = PBXGroup;
+			children = (
+				38CD81FB24E5D7F900E43D2E /* Capstone 3DUITests.swift */,
+				38CD81FA24E5D7F900E43D2E /* Info.plist */,
+			);
+			path = "Capstone 3DUITests";
+			sourceTree = "<group>";
+		};
+		38E6753C24B8AF8E006A21A0 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				38E6753D24B8AFA7006A21A0 /* MotionHelper.swift */,
+				38E6754024B8B120006A21A0 /* VectorOperations.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		381A135324B6677F00774855 /* Capstone 3D */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 381A137E24B6678400774855 /* Build configuration list for PBXNativeTarget "Capstone 3D" */;
+			buildPhases = (
+				381A135024B6677F00774855 /* Sources */,
+				381A135124B6677F00774855 /* Frameworks */,
+				381A135224B6677F00774855 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Capstone 3D";
+			productName = HitTheTree;
+			productReference = 381A135424B6677F00774855 /* Capstone 3D.app */;
+			productType = "com.apple.product-type.application";
+		};
+		381A136924B6678400774855 /* Capstone 3DTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 381A138124B6678400774855 /* Build configuration list for PBXNativeTarget "Capstone 3DTests" */;
+			buildPhases = (
+				381A136624B6678400774855 /* Sources */,
+				381A136724B6678400774855 /* Frameworks */,
+				381A136824B6678400774855 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				381A136C24B6678400774855 /* PBXTargetDependency */,
+			);
+			name = "Capstone 3DTests";
+			productName = HitTheTreeTests;
+			productReference = 381A136A24B6678400774855 /* Capstone 3DTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		381A137424B6678400774855 /* Capstone 3DUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 381A138424B6678400774855 /* Build configuration list for PBXNativeTarget "Capstone 3DUITests" */;
+			buildPhases = (
+				381A137124B6678400774855 /* Sources */,
+				381A137224B6678400774855 /* Frameworks */,
+				381A137324B6678400774855 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				381A137724B6678400774855 /* PBXTargetDependency */,
+			);
+			name = "Capstone 3DUITests";
+			productName = HitTheTreeUITests;
+			productReference = 381A137524B6678400774855 /* Capstone 3DUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		381A134C24B6677F00774855 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = "Zachary Salmon";
+				TargetAttributes = {
+					381A135324B6677F00774855 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+					381A136924B6678400774855 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 381A135324B6677F00774855;
+					};
+					381A137424B6678400774855 = {
+						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1160;
+						TestTargetID = 381A135324B6677F00774855;
+					};
+				};
+			};
+			buildConfigurationList = 381A134F24B6677F00774855 /* Build configuration list for PBXProject "Capstone 3D" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 381A134B24B6677F00774855;
+			productRefGroup = 381A135524B6677F00774855 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				381A135324B6677F00774855 /* Capstone 3D */,
+				381A136924B6678400774855 /* Capstone 3DTests */,
+				381A137424B6678400774855 /* Capstone 3DUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		381A135224B6677F00774855 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38097DE324F426D4003ABDFF /* TableViewCell.xib in Resources */,
+				381A136424B6678300774855 /* LaunchScreen.storyboard in Resources */,
+				381A138824B668CD00774855 /* art.scnassets in Resources */,
+				381A136124B6678300774855 /* Assets.xcassets in Resources */,
+				381A135F24B6677F00774855 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		381A136824B6678400774855 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		381A137324B6678400774855 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38CD81FC24E5D7F900E43D2E /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		381A135024B6677F00774855 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38E6754124B8B120006A21A0 /* VectorOperations.swift in Sources */,
+				3842D33C24D866EF00839E24 /* OverlayScene.swift in Sources */,
+				386CCC9A24DC9392005113BD /* MainMenu.swift in Sources */,
+				38097DE224F426D4003ABDFF /* TableViewCell.swift in Sources */,
+				380DFC952537460D004A56CF /* Coins.swift in Sources */,
+				381A135C24B6677F00774855 /* GameViewController.swift in Sources */,
+				380DFC8225364740004A56CF /* Player.swift in Sources */,
+				381A135824B6677F00774855 /* AppDelegate.swift in Sources */,
+				38DC5BD9251E4DB900B12540 /* GameOverMenu.swift in Sources */,
+				38E6753E24B8AFA7006A21A0 /* MotionHelper.swift in Sources */,
+				38214DD424F02F0700503FBB /* Leaderboard.swift in Sources */,
+				386CCC9824DB5612005113BD /* PauseMenu.swift in Sources */,
+				380DFC8D25369A21004A56CF /* Track.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		381A136624B6678400774855 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		381A137124B6678400774855 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38CD81FD24E5D7F900E43D2E /* Capstone 3DUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		381A136C24B6678400774855 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 381A135324B6677F00774855 /* Capstone 3D */;
+			targetProxy = 381A136B24B6678400774855 /* PBXContainerItemProxy */;
+		};
+		381A137724B6678400774855 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 381A135324B6677F00774855 /* Capstone 3D */;
+			targetProxy = 381A137624B6678400774855 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		381A135D24B6677F00774855 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				381A135E24B6677F00774855 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		381A136224B6678300774855 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				381A136324B6678300774855 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		381A137C24B6678400774855 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		381A137D24B6678400774855 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		381A137F24B6678400774855 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Capstone 3D/Capstone 3D.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_ASSET_PATHS = "Capstone\\ 3D/art.scnassets";
+				DEVELOPMENT_TEAM = B237UTD4LC;
+				INFOPLIST_FILE = "$(SRCROOT)/Capstone 3D/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.capstone.zsalmon;
+				PRODUCT_NAME = "Capstone 3D";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		381A138024B6678400774855 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Capstone 3D/Capstone 3D.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_ASSET_PATHS = "Capstone\\ 3D/art.scnassets";
+				DEVELOPMENT_TEAM = B237UTD4LC;
+				INFOPLIST_FILE = "$(SRCROOT)/Capstone 3D/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.capstone.zsalmon;
+				PRODUCT_NAME = "Capstone 3D";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		381A138224B6678400774855 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B237UTD4LC;
+				INFOPLIST_FILE = HitTheTreeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zSalmon.HitTheTreeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Capstone 3D.app/Capstone 3D";
+			};
+			name = Debug;
+		};
+		381A138324B6678400774855 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B237UTD4LC;
+				INFOPLIST_FILE = HitTheTreeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zSalmon.HitTheTreeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Capstone 3D.app/Capstone 3D";
+			};
+			name = Release;
+		};
+		381A138524B6678400774855 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B237UTD4LC;
+				INFOPLIST_FILE = HitTheTreeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zSalmon.HitTheTreeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Capstone 3DUITests/Capstone 3DUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Capstone 3D";
+			};
+			name = Debug;
+		};
+		381A138624B6678400774855 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B237UTD4LC;
+				INFOPLIST_FILE = HitTheTreeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zSalmon.HitTheTreeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Capstone 3DUITests/Capstone 3DUITests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Capstone 3D";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		381A134F24B6677F00774855 /* Build configuration list for PBXProject "Capstone 3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				381A137C24B6678400774855 /* Debug */,
+				381A137D24B6678400774855 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		381A137E24B6678400774855 /* Build configuration list for PBXNativeTarget "Capstone 3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				381A137F24B6678400774855 /* Debug */,
+				381A138024B6678400774855 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		381A138124B6678400774855 /* Build configuration list for PBXNativeTarget "Capstone 3DTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				381A138224B6678400774855 /* Debug */,
+				381A138324B6678400774855 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		381A138424B6678400774855 /* Build configuration list for PBXNativeTarget "Capstone 3DUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				381A138524B6678400774855 /* Debug */,
+				381A138624B6678400774855 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 381A134C24B6677F00774855 /* Project object */;
+}
