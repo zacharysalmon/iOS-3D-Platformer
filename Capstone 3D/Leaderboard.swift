@@ -47,7 +47,7 @@ class Leaderboard: UITableViewController
 	
 	@IBAction func backToMenuTapped(_ sender: Any)
 	{
-		print("Back tapped")
+//		print("Back tapped")
 		dismiss(animated: true, completion: nil)
 	}
 	
@@ -123,7 +123,7 @@ class Leaderboard: UITableViewController
 									}
 								}
 							}
-							self.printRecords(records)
+							self.reloadLeaderboard(records)
 						}
 					}
 				}
@@ -134,31 +134,10 @@ class Leaderboard: UITableViewController
 	// Utility function to display records.
 	// Customize it to display records appropriately
 	// according to your app's unique record types.
-	func printRecords(_ records: [CKRecord])
+	func reloadLeaderboard(_ records: [CKRecord])
 	{
-		print("printRecords\n")
-		for record in records
-		{
-//			print(record.creatorUserRecordID!)
-//			print(record.description)
-//			print(record.recordID)
-//			print(record.recordType)
-			for key in record.allKeys()
-			{
-//				let value = record[key]
-//				print("value: \(String(describing: value))")
-				if key == "player_score"
-				{
-					
-//					print(key + " = " + (value?.description ?? "") + ")")
-				}
-				
-			}
-//			print("\n\n")
-		}
 		DispatchQueue.main.async
 		{
-//			print("main")
 			self.tableView.reloadData()
 		}
 	}
@@ -179,27 +158,16 @@ class Leaderboard: UITableViewController
 	{
 //		print("cellForRowAt")
 		let cell = Bundle.main.loadNibNamed("TableViewCell", owner: self, options: nil)?.first as! TableViewCell
+	
+		let new_name = leaderboard[indexPath.row].value(forKey: "player_name") as! String
+		let new_score = leaderboard[indexPath.row].value(forKey: "player_score") as! Int
+		let new_coins = leaderboard[indexPath.row].value(forKey: "player_coins") as! Int
 		
-//		if first_row
-//		{
-//			//Default values for the leaderboard
-//			cell.place?.text = "Place"
-//			cell.name?.text = "Name"
-//			cell.score?.text = "Score"
-//			cell.coins?.text = "Jumps"
-//			first_row = false
-//		}
-//		else
-//		{
-			let new_name = leaderboard[indexPath.row].value(forKey: "player_name") as! String
-			let new_score = leaderboard[indexPath.row].value(forKey: "player_score") as! Int
-			let new_coins = leaderboard[indexPath.row].value(forKey: "player_coins") as! Int
-			
-			cell.place?.text = String(indexPath.row + 1)
-			cell.name?.text = new_name
-			cell.score?.text = String(new_score)
-			cell.coins?.text = String(new_coins)
-//		}
+		cell.place?.text = String(indexPath.row + 1)
+		cell.name?.text = new_name
+		cell.score?.text = String(new_score)
+		cell.coins?.text = String(new_coins)
+		
 		return cell
 	}
 
