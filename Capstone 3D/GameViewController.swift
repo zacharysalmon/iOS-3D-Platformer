@@ -180,7 +180,7 @@ class GameViewController: UIViewController
 		red_coins = scene.rootNode.childNode(withName: "red_coins", recursively: true)!
 		red_coin_node = scene.rootNode.childNode(withName: "red_coin", recursively: true)!
 		
-		red_coin = Coin(coin_node: yellow_coin_node, coin_color: "red")
+		red_coin = Coin(coin_node: red_coin_node, coin_color: "red")
 		placeCoins()
 		
 //		player_related = scene.rootNode.childNode(withName: "player_related", recursively: true)!
@@ -409,10 +409,14 @@ class GameViewController: UIViewController
 		return SCNVector3(random_x, random_y, random_z)
 	}
 	
-	func getCoinPositionVector() -> SCNVector3
+	func getCoinPositionVector(coin: Coin) -> SCNVector3
 	{
 		let random_x = CGFloat.random(in: -17.0 ... 17.0)
-		let random_y = CGFloat(3.0)
+		var random_y = CGFloat(3.0)
+		if coin.getCoinColor() == "red"
+		{
+			random_y = CGFloat(7.0)
+		}
 //		let random_z = CGFloat.random(in: (CGFloat(next_track_position_z + track_length + obstacle_distance_buffer)) ... (CGFloat(next_track_position_z + (track_length * 2) - obstacle_distance_buffer)))
 	let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
 		return SCNVector3(random_x, random_y, random_z)
@@ -442,12 +446,12 @@ class GameViewController: UIViewController
 
 		for each in yellow_coins.childNodes
 		{
-			each.position = getCoinPositionVector()
+			each.position = getCoinPositionVector(coin: yellow_coin)
 		}
 
 		for each in red_coins.childNodes
 		{
-			each.position = getCoinPositionVector()
+			each.position = getCoinPositionVector(coin: red_coin)
 		}
 	}
 	

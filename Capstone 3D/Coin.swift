@@ -58,41 +58,45 @@ class Coin
 
 //____________________________________________________________________________________
 	//Mutators
-	
-	
-//	func placeCoins()
+//
+//	func placeCoins(yellow_coins: SCNNode, red_coins: SCNNode, track: Track)
 //	{
 //		while yellow_coins.childNodes.count < 5
 //		{
-//			yellow_coins.addChildNode(yellow_coin_node.clone())
+//			let yellow_clone = Coin(coin_node: self.coin_node.clone(), coin_color: "yellow")
+//			yellow_coins.addChildNode(yellow_clone.getCoinNode())
 //		}
-////		print(yellow_coins.childNodes)
+//		print("yellow: \(yellow_coins.childNodes.count)")
 //
 //		if red_coins.childNodes.count < 1
 //		{
 //			print("Adding red coin")
-//			red_coins.addChildNode(red_coin_node.clone())
+//			let red_clone = Coin(coin_node: self.coin_node.clone(), coin_color: "red")
+//			red_coins.addChildNode(red_clone.getCoinNode())
 //		}
-////		print(red_coins.childNodes)
+//		print("red: \(red_coins.childNodes.count)")
 //
 //
-//		print("yellow_count: \(yellow_coins.childNodes.count)")
-//		print("red_count: \(red_coins.childNodes.count)")
-////
-////		for each in yellow_coins.childNodes
-////		{
-////			let random_x = CGFloat.random(in: -17.0 ... 17.0)
-////			let random_y = CGFloat(3.0)
-////			let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
-////			each.position = SCNVector3(random_x, random_y, random_z)
-////		}
-////
-////		for each in red_coins.childNodes
-////		{
-////			let random_x = CGFloat.random(in: -17.0 ... 17.0)
-////			let random_y = CGFloat(7.0)
-////			let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
-////			each.position = SCNVector3(random_x, random_y, random_z)
-////		}
+////		print("yellow_count: \(yellow_coins.childNodes.count)")
+////		print("red_count: \(red_coins.childNodes.count)")
+//
+//		for each in yellow_coins.childNodes
+//		{
+//			each.position = getCoinPositionVector(track: track)
+//		}
+//
+//		for each in red_coins.childNodes
+//		{
+//			each.position = getCoinPositionVector(track: track)
+//		}
+//	}
+	
+//	public func getCoinPositionVector(track: Track) -> SCNVector3
+//	{
+//		let random_x = CGFloat.random(in: -17.0 ... 17.0)
+//		let random_y = CGFloat(3.0)
+////		let random_z = CGFloat.random(in: (CGFloat(next_track_position_z + track_length + obstacle_distance_buffer)) ... (CGFloat(next_track_position_z + (track_length * 2) - obstacle_distance_buffer)))
+//	let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
+//		return SCNVector3(random_x, random_y, random_z)
 //	}
 }
