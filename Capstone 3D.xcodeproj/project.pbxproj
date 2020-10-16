@@ -22,6 +22,7 @@
 		3842D33C24D866EF00839E24 /* OverlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3842D33B24D866EF00839E24 /* OverlayScene.swift */; };
 		386CCC9824DB5612005113BD /* PauseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386CCC9724DB5612005113BD /* PauseMenu.swift */; };
 		386CCC9A24DC9392005113BD /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386CCC9924DC9392005113BD /* MainMenu.swift */; };
+		38C9E2DF2539F15C00F9C163 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C9E2DE2539F15C00F9C163 /* Database.swift */; };
 		38CD81FC24E5D7F900E43D2E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38CD81FA24E5D7F900E43D2E /* Info.plist */; };
 		38CD81FD24E5D7F900E43D2E /* Capstone 3DUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CD81FB24E5D7F900E43D2E /* Capstone 3DUITests.swift */; };
 		38DC5BD9251E4DB900B12540 /* GameOverMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DC5BD8251E4DB900B12540 /* GameOverMenu.swift */; };
@@ -72,6 +73,7 @@
 		3842EE3D24EDB34A00053A13 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		386CCC9724DB5612005113BD /* PauseMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseMenu.swift; sourceTree = "<group>"; };
 		386CCC9924DC9392005113BD /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		38C9E2DE2539F15C00F9C163 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		38CD81FA24E5D7F900E43D2E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38CD81FB24E5D7F900E43D2E /* Capstone 3DUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Capstone 3DUITests.swift"; sourceTree = "<group>"; };
 		38DC5BD8251E4DB900B12540 /* GameOverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverMenu.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				381A135B24B6677F00774855 /* GameViewController.swift */,
 				380DFC8C25369A21004A56CF /* Track.swift */,
 				380DFC942537460D004A56CF /* Coin.swift */,
+				38C9E2DE2539F15C00F9C163 /* Database.swift */,
 				38214DD324F02F0700503FBB /* Leaderboard.swift */,
 				380DFC8125364740004A56CF /* Player.swift */,
 				38097DE024F426D4003ABDFF /* TableViewCell.swift */,
@@ -327,6 +330,7 @@
 				38E6753E24B8AFA7006A21A0 /* MotionHelper.swift in Sources */,
 				38214DD424F02F0700503FBB /* Leaderboard.swift in Sources */,
 				386CCC9824DB5612005113BD /* PauseMenu.swift in Sources */,
+				38C9E2DF2539F15C00F9C163 /* Database.swift in Sources */,
 				380DFC8D25369A21004A56CF /* Track.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

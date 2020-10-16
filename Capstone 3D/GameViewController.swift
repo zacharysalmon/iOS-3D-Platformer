@@ -19,8 +19,8 @@ class GameViewController: UIViewController
 	var sprite_scene: OverlayScene!
 	var pause_menu: PauseMenu!
 	let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-	let public_database = CKContainer.default().publicCloudDatabase
-	let private_database = CKContainer.default().privateCloudDatabase
+//	let public_database = CKContainer.default().publicCloudDatabase
+//	let private_database = CKContainer.default().privateCloudDatabase
 	var leaderboard: [CKRecord] = []
 
 	
@@ -33,6 +33,8 @@ class GameViewController: UIViewController
 //	let player_speed_delta: CGFloat = 0.001
 //	let player_jump_height: Float = 5.0
 //	var player_coins: Int = 0
+	
+	var database: Database!
 	
 	var track: Track!
 //	var track2: Track!
@@ -151,6 +153,9 @@ class GameViewController: UIViewController
 //		everything_node = scene.rootNode.childNode(withName: "everything", recursively: true)!
 		player = Player(player_node: scene.rootNode.childNode(withName: "player", recursively: true)!, selfie_stick_node: scene.rootNode.childNode(withName: "selfie_stick", recursively: true)!)
 //		selfie_stick_node = scene.rootNode.childNode(withName: "selfie_stick", recursively: true)!
+		
+		
+		database = Database()
 		
 		track_layer = scene.rootNode.childNode(withName: "track_layer", recursively: true)!
 //		track = scene.rootNode.childNode(withName: "track", recursively: true)!
@@ -494,57 +499,9 @@ class GameViewController: UIViewController
 			print("Game Over")
 			self.player.getPlayerNode().removeFromParentNode()
 			sprite_scene.setHighScore()
-			saveToCloud()
+			database.saveToCloud(score: self.sprite_scene.score, player: player)
 			openGameOverMenu()
 		}
-	}
-	
-	func saveToCloud()
-	{
-//		var user_reference = String()
-		CKContainer.default().fetchUserRecordID
-		{ (record_id, error_1) in
-			if error_1 != nil
-			{
-				print(error_1!)
-			}
-			let player_name = UserDefaults.standard.string(forKey: "player_name")
-			self.public_database.fetch(withRecordID: record_id!)
-			{ (record1, error_2) in
-				if error_2 != nil
-				{
-					print(error_2!)
-				}
-				
-				let old_high_score = UserDefaults.standard.value(forKey: "high_score") as! Int
-				
-				if record1 != nil && old_high_score < self.sprite_scene.score
-				{
-					record1!.setValue(player_name, forKey: "player_name")
-					record1!.setValue(self.sprite_scene.score, forKey: "player_score")
-					record1!.setValue(self.player.getPlayerCoins(), forKey: "player_coins")
-					self.public_database.save(record1!)
-						{ (record2, error_3)
-							in
-							guard record2 != nil else {print(error_3!); return}
-							print("user_record: \(String(describing: record1))")
-						print("record2: \(String(describing: record2))")
-						}
-				}
-				let user_id = record1?.recordID.recordName
-				UserDefaults.standard.setValue(user_id, forKey: "user_id")
-				
-				let player_record = CKRecord(recordType: "Player")
-				player_record.setValue(user_id, forKey: "user_reference")
-				player_record.setValue(player_name, forKey: "player_name")
-				player_record.setValue(self.sprite_scene.score, forKey: "player_score")
-				player_record.setValue(self.player.getPlayerCoins(), forKey: "player_coins")
-				let operation = CKModifyRecordsOperation(recordsToSave: [player_record], recordIDsToDelete: nil)
-//				print("player_record: \(player_record)")
-				self.public_database.add(operation)
-			}
-		}
-		
 	}
 	
 	func unpauseWorld()
