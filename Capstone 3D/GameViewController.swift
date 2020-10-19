@@ -52,11 +52,14 @@ class GameViewController: UIViewController
 	
 //	var coins: Coins
 	var yellow_coin: Coin!
-	var red_coin: Coin!
+	var yellow_coins_1: SCNNode!
+	var yellow_coins_2: SCNNode!
 	var yellow_coin_node: SCNNode!
+	
+	var red_coins_1: SCNNode!
+	var red_coins_2: SCNNode!
 	var red_coin_node: SCNNode!
-	var yellow_coins: SCNNode!
-	var red_coins: SCNNode!
+	var red_coin: Coin!
 	
 // All nodes that appear in the scene
 //  var selfie_stick_node: SCNNode!
@@ -177,23 +180,25 @@ class GameViewController: UIViewController
 			obstacle_layer_1.insertChildNode(tree_node.clone(), at: i)
 			obstacle_layer_2.insertChildNode(tree_node.clone(), at: i)
 		}
-		print("1: \(obstacle_layer_1.childNodes.count)")
-		print("2: \(obstacle_layer_2.childNodes.count)")
+//		print("obstacles 1: \(obstacle_layer_1.childNodes.count)")
+//		print("obstacles 2: \(obstacle_layer_2.childNodes.count)")
 		placeObstacles()
 		loopObstacles()
 		
 		
 		
-		yellow_coins = scene.rootNode.childNode(withName: "yellow_coins", recursively: true)!
+		yellow_coins_1 = scene.rootNode.childNode(withName: "yellow_coins_1", recursively: true)!
+		yellow_coins_2 = scene.rootNode.childNode(withName: "yellow_coins_2", recursively: true)!
 		yellow_coin_node = scene.rootNode.childNode(withName: "yellow_coin", recursively: true)!
-		
 		yellow_coin = Coin(coin_node: yellow_coin_node, coin_color: "yellow")
 		
-		red_coins = scene.rootNode.childNode(withName: "red_coins", recursively: true)!
+		red_coins_1 = scene.rootNode.childNode(withName: "red_coins_1", recursively: true)!
+		red_coins_2 = scene.rootNode.childNode(withName: "red_coins_2", recursively: true)!
 		red_coin_node = scene.rootNode.childNode(withName: "red_coin", recursively: true)!
-		
 		red_coin = Coin(coin_node: red_coin_node, coin_color: "red")
+		
 		placeCoins()
+		loopCoins()
 		
 //		player_related = scene.rootNode.childNode(withName: "player_related", recursively: true)!
 		
@@ -297,12 +302,13 @@ class GameViewController: UIViewController
 			}
 			else if object.name == "yellow_coin"
 			{
-				object.removeFromParentNode()
+//				print("parent: \(object.parent?.parent?.name)")
+				object.parent?.removeFromParentNode()
 				yellowCoinHit()
 			}
 			else if object.name == "red_coin"
 			{
-				object.removeFromParentNode()
+				object.parent?.removeFromParentNode()
 				redCoinHit()
 			}
 		}
@@ -318,7 +324,7 @@ class GameViewController: UIViewController
 			print("player: \(player.getPlayerPosition().z)")
 			track.loopTrack(track_layer: track_layer)
 			loopObstacles()
-			placeCoins()
+			loopCoins()
 		}
 		
 		for each in collisions_array
@@ -390,7 +396,6 @@ class GameViewController: UIViewController
 			}
 		
 			each.position = random_position
-//			print("trees: \(each.position)")
 			
 		}
 	}
@@ -398,15 +403,12 @@ class GameViewController: UIViewController
 	func loopObstacles()
 	{
 		var next_looping_layer: SCNNode
-		print("Jump_Count: \(jump_count)")
 		if jump_count % 2 == 0
 		{
-			print("layer2")
 			next_looping_layer = obstacle_layer_2
 		}
 		else
 		{
-			print("layer1")
 			next_looping_layer = obstacle_layer_1
 		}
 		for each in next_looping_layer.childNodes
@@ -428,8 +430,6 @@ class GameViewController: UIViewController
 			}
 		
 			each.position = random_position
-//			print("trees: \(each.position)")
-			
 		}
 	}
 	
@@ -449,42 +449,77 @@ class GameViewController: UIViewController
 		{
 			random_y = CGFloat(7.0)
 		}
-//		let random_z = CGFloat.random(in: (CGFloat(next_track_position_z + track_length + obstacle_distance_buffer)) ... (CGFloat(next_track_position_z + (track_length * 2) - obstacle_distance_buffer)))
-	let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
+		let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
 		return SCNVector3(random_x, random_y, random_z)
 	}
 
 	
 	func placeCoins()
 	{
-		while yellow_coins.childNodes.count < 5
+		while yellow_coins_1.childNodes.count < number_of_coins
 		{
-			let yellow_clone = Coin(coin_node: yellow_coin_node.clone(), coin_color: "yellow")
-			yellow_coins.addChildNode(yellow_clone.getCoinNode())
+			let yellow_clone_1 = Coin(coin_node: yellow_coin_node.clone(), coin_color: "yellow")
+			yellow_coins_1.addChildNode(yellow_clone_1.getCoinNode())
 		}
-//		print(yellow_coins.childNodes)
 
-		if red_coins.childNodes.count < 1
+		if red_coins_1.childNodes.count < 1
 		{
-			print("Adding red coin")
-			let red_clone = Coin(coin_node: red_coin_node.clone(), coin_color: "red")
-			red_coins.addChildNode(red_clone.getCoinNode())
+//			print("Adding red coin")
+			let red_clone_1 = Coin(coin_node: red_coin_node.clone(), coin_color: "red")
+			red_coins_1.addChildNode(red_clone_1.getCoinNode())
 		}
-//		print(red_coins.childNodes)
 
-
-//		print("yellow_count: \(yellow_coins.childNodes.count)")
-//		print("red_count: \(red_coins.childNodes.count)")
-
-		for each in yellow_coins.childNodes
+		for each in yellow_coins_1.childNodes
 		{
 			each.position = getCoinPositionVector(coin: yellow_coin)
 		}
 
-		for each in red_coins.childNodes
+		for each in red_coins_1.childNodes
 		{
 			each.position = getCoinPositionVector(coin: red_coin)
 		}
+	}
+	
+	func loopCoins()
+	{
+		var next_yellow: SCNNode
+		var next_red: SCNNode
+		if jump_count % 2 == 0
+		{
+			next_yellow = yellow_coins_2
+			next_red = red_coins_2
+		}
+		else
+		{
+			next_yellow = yellow_coins_1
+			next_red = red_coins_1
+		}
+		
+		while next_yellow.childNodes.count < number_of_coins
+		{
+			let yellow_clone_1 = Coin(coin_node: yellow_coin_node.clone(), coin_color: "yellow")
+			next_yellow.addChildNode(yellow_clone_1.getCoinNode())
+		}
+		
+		if next_red.childNodes.count < 1
+		{
+			let red_clone_1 = Coin(coin_node: red_coin_node.clone(), coin_color: "red")
+			next_red.addChildNode(red_clone_1.getCoinNode())
+		}
+		
+		for each in next_yellow.childNodes
+		{
+			each.position = getCoinPositionVector(coin: yellow_coin)
+			each.position.z -= track.getTrackLength()
+		}
+		
+		for each in next_red.childNodes
+		{
+			each.position = getCoinPositionVector(coin: red_coin)
+			each.position.z -= track.getTrackLength()
+		}
+		
+		
 	}
 	
 	func updateLevel()
@@ -494,11 +529,6 @@ class GameViewController: UIViewController
 			let player_speed_increment: Float = 0.20
 			player.setPlayerSpeed(speed: player.getPlayerSpeed() + player_speed_increment)
 		}
-//		if track_length < max_track_length
-//  		{
-//			track_length += 30
-//			next_track_position_z -= 10
-//		}
 		if track.getTrackLength() < track.getMaxTrackLength()
 		{
 			track.setTrackLength(track_length: track.getTrackLength() + 30)
@@ -510,7 +540,7 @@ class GameViewController: UIViewController
 		}
 		
 //		print("speed: \(player.getPlayerSpeed()), track_length: \(track_length), next_track: \(next_track_position_z), tree_count: \(obstacle_layer.childNodes.count)")
-		print("speed: \(player.getPlayerSpeed()), track_length: \(track.getTrackLength()), next_track: \(track.getNextTrackPositionZ()), tree_count: \(obstacle_layer_1.childNodes.count)")
+//		print("speed: \(player.getPlayerSpeed()), track_length: \(track.getTrackLength()), next_track: \(track.getNextTrackPositionZ()), tree_count: \(obstacle_layer_1.childNodes.count)")
 	}
 	
 	
