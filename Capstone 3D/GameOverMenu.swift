@@ -30,6 +30,7 @@ class GameOverMenu: UIViewController
 			vc = vc?.presentingViewController
 		}
 		vc?.dismiss(animated: true, completion: nil)
+		vc?.viewDidLoad()
 	}
 	
 }

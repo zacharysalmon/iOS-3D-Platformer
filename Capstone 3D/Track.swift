@@ -29,7 +29,7 @@ class Track
 		self.track = track
 		self.floor = floor
 		self.track_length = 530.0
-		self.next_track_position_z = -1060.0
+		self.next_track_position_z = -track_length * 2
 	}
 
 //____________________________________________________________________________________
@@ -99,23 +99,13 @@ class Track
 	func loopTrack(track_layer: SCNNode)
 	{
 		let old_track: SCNNode! = track_layer.childNodes.first
-//		print(old_track.position.z)
 		
 		let new_track: SCNNode! = old_track.clone()
 		new_track.position = SCNVector3(0.0, 0.0, next_track_position_z)
 		next_track_position_z -= track_length
-//		print(new_track.position.z)
 		
 		old_track.removeFromParentNode()
 		track_layer.addChildNode(new_track)
-//		print(track_layer.childNodes.count)
-		
-
-//		for each in track_layer.childNodes
-//		{
-//			print("pos: \(each.position.z)")
-//		}
-//		print("next: \(next_track_position_z)")
 	}
 
 }

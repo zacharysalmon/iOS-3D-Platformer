@@ -62,14 +62,16 @@ class GameViewController: UIViewController
 //  var selfie_stick_node: SCNNode!
 //	var cam_1: SCNNode!
 	
-	var obstacle_layer: SCNNode!
+	var obstacle_layer_1: SCNNode!
+	var obstacle_layer_2: SCNNode!
 	var tree_node: SCNNode!
 	var last_contact: SCNNode!
 	
 	//Various numbers used in calculations and constant positions.
 	let starting_point: SCNVector3 =  SCNVector3(0.0, 0.5, 0.0)
 	var count = 0
-	var start = Date.timeIntervalSinceReferenceDate
+	var coin_timer_start = Date.timeIntervalSinceReferenceDate
+	var tree_timer_start = Date.timeIntervalSinceReferenceDate
 	var jump_count = 0
 	
 	
@@ -167,12 +169,17 @@ class GameViewController: UIViewController
 //		floor = scene.rootNode.childNode(withName: "floor", recursively: true)!
 //		cam_1 = scene.rootNode.childNode(withName: "cam_1", recursively: true)!
 		
-		obstacle_layer = scene.rootNode.childNode(withName: "obstacle_layer", recursively: true)!
+		obstacle_layer_1 = scene.rootNode.childNode(withName: "obstacle_layer_1", recursively: true)!
+		obstacle_layer_2 = scene.rootNode.childNode(withName: "obstacle_layer_2", recursively: true)!
 		tree_node = scene.rootNode.childNode(withName: "tree", recursively: true)!
 		for i in 0...number_of_trees
 		{
-			obstacle_layer.insertChildNode(tree_node.clone(), at: i)
+			obstacle_layer_1.insertChildNode(tree_node.clone(), at: i)
+			obstacle_layer_2.insertChildNode(tree_node.clone(), at: i)
 		}
+		print("1: \(obstacle_layer_1.childNodes.count)")
+		print("2: \(obstacle_layer_2.childNodes.count)")
+		placeObstacles()
 		loopObstacles()
 		
 		
@@ -327,30 +334,30 @@ class GameViewController: UIViewController
 	
 	func yellowCoinHit()
 	{
-		let end = NSDate.timeIntervalSinceReferenceDate
-		let elapsed = end - self.start
+		let coin_timer_end = NSDate.timeIntervalSinceReferenceDate
+		let coin_time_elapsed = coin_timer_end - self.coin_timer_start
 //		print("elapsed: \(elapsed)")
-		if elapsed > 0.1
+		if coin_time_elapsed > 0.01
 		{
 			print("yellow")
 			self.sprite_scene.score += 1
 			self.player.setPlayerCoins(coins: self.player.getPlayerCoins() + 1)
 		}
-		self.start = NSDate.timeIntervalSinceReferenceDate
+		self.coin_timer_start = NSDate.timeIntervalSinceReferenceDate
 	}
 	
 	func redCoinHit()
 	{
-		let end = NSDate.timeIntervalSinceReferenceDate
-		let elapsed = end - self.start
+		let coin_timer_end = NSDate.timeIntervalSinceReferenceDate
+		let coin_time_elapsed = coin_timer_end - self.coin_timer_start
 //		print("elapsed: \(elapsed)")
-		if elapsed > 0.01
+		if coin_time_elapsed > 0.01
 		{
 			print("red")
 			self.sprite_scene.score += 5
 			self.player.setPlayerCoins(coins: self.player.getPlayerCoins() + 5)
 		}
-		self.start = NSDate.timeIntervalSinceReferenceDate
+		self.coin_timer_start = NSDate.timeIntervalSinceReferenceDate
 	}
 	
 	func updateScore()
@@ -363,27 +370,9 @@ class GameViewController: UIViewController
 		}
 	}
 	
-//	func loopTrack()
-//	{
-//		let old_track: SCNNode! = track_layer.childNode(withName: "track", recursively: false)
-//
-//		let new_track: SCNNode! = old_track.clone()
-//		old_track.removeFromParentNode()
-//		track_layer.addChildNode(new_track)
-//		new_track.position = SCNVector3(0.0, 0.0, next_track_position_z)
-//		next_track_position_z -= track_length
-////		print(track_layer.childNodes.count)
-//
-//		for each in track_layer.childNodes
-//		{
-//			print("pos: \(each.position.z)")
-//		}
-//		print("next: \(next_track_position_z)")
-//	}
-	
-	func loopObstacles()
+	func placeObstacles()
 	{
-		for each in obstacle_layer.childNodes
+		for each in obstacle_layer_1.childNodes
 		{
 			each.eulerAngles = SCNVector3(0.0, 0.0, 0.0)
 			var random_position = getTreePositionVector()
@@ -402,6 +391,45 @@ class GameViewController: UIViewController
 		
 			each.position = random_position
 //			print("trees: \(each.position)")
+			
+		}
+	}
+	
+	func loopObstacles()
+	{
+		var next_looping_layer: SCNNode
+		print("Jump_Count: \(jump_count)")
+		if jump_count % 2 == 0
+		{
+			print("layer2")
+			next_looping_layer = obstacle_layer_2
+		}
+		else
+		{
+			print("layer1")
+			next_looping_layer = obstacle_layer_1
+		}
+		for each in next_looping_layer.childNodes
+		{
+			each.eulerAngles = SCNVector3(0.0, 0.0, 0.0)
+			var random_position = getTreePositionVector()
+			random_position.z -= track.getTrackLength()
+			if random_position.x > 19.0
+			{
+				//right side
+				each.eulerAngles.z = 0.45
+				random_position.y = random_position.x.magnitude / 6.0
+			}
+			else if random_position.x < -19.0
+			{
+				//left side
+				each.eulerAngles.z = -0.45
+				random_position.y = random_position.x.magnitude / 6.0
+			}
+		
+			each.position = random_position
+//			print("trees: \(each.position)")
+			
 		}
 	}
 	
@@ -409,8 +437,7 @@ class GameViewController: UIViewController
 	{
 		let random_x = CGFloat.random(in: -25.0 ... 25.0)
 		let random_y = CGFloat(0.0)
-//		let random_z = CGFloat.random(in: (CGFloat(next_track_position_z + track_length + obstacle_distance_buffer)) ... (CGFloat(next_track_position_z + (track_length * 2) - obstacle_distance_buffer)))
-	let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
+		let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
 		return SCNVector3(random_x, random_y, random_z)
 	}
 	
@@ -477,23 +504,23 @@ class GameViewController: UIViewController
 			track.setTrackLength(track_length: track.getTrackLength() + 30)
 			track.setNextTrackPositionZ(next_track_position_z: track.getNextTrackPositionZ() - 10)
 		}
-		if obstacle_layer.childNodes.count <= max_number_of_trees
+		if obstacle_layer_1.childNodes.count <= max_number_of_trees
 		{
-			obstacle_layer.addChildNode(tree_node.clone())
+			obstacle_layer_1.addChildNode(tree_node.clone())
 		}
 		
 //		print("speed: \(player.getPlayerSpeed()), track_length: \(track_length), next_track: \(next_track_position_z), tree_count: \(obstacle_layer.childNodes.count)")
-		print("speed: \(player.getPlayerSpeed()), track_length: \(track.getTrackLength()), next_track: \(track.getNextTrackPositionZ()), tree_count: \(obstacle_layer.childNodes.count)")
+		print("speed: \(player.getPlayerSpeed()), track_length: \(track.getTrackLength()), next_track: \(track.getNextTrackPositionZ()), tree_count: \(obstacle_layer_1.childNodes.count)")
 	}
 	
 	
 	func gameOver()
 	{
-		let end = NSDate.timeIntervalSinceReferenceDate
-		let elapsed = end - start
-		start = NSDate.timeIntervalSinceReferenceDate
-//		print(elapsed)
-		if elapsed > 0.1
+		let tree_timer_end = NSDate.timeIntervalSinceReferenceDate
+		let tree_time_elapsed = tree_timer_end - tree_timer_start
+		tree_timer_start = NSDate.timeIntervalSinceReferenceDate
+//		print(tree_time_elapsed)
+		if tree_time_elapsed > 1.0
 		{
 			collisions_array["game_over"] = true
 			print("Game Over")

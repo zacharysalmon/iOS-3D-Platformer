@@ -21,10 +21,13 @@ class MainMenu: UIViewController
 		player_name.delegate = self
 		let user_defaults = UserDefaults.standard
 		player_name.text = user_defaults.string(forKey: "player_name")
-		player_high_score.text = "0"
 		if user_defaults.value(forKey: "high_score") != nil
 		{
 			player_high_score.text = user_defaults.string(forKey: "high_score")
+		}
+		else
+		{
+			player_high_score.text = "0"
 		}
 		print("MainMenu viewdidload()")
 	}
@@ -32,7 +35,7 @@ class MainMenu: UIViewController
 	@IBAction func reloadView(_ sender: Any)
 	{
 		print("MainMenu reloadView()")
-		viewDidLoad()
+//		viewDidLoad()
 	}
 	
 	
@@ -69,7 +72,7 @@ class MainMenu: UIViewController
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
 	{
 //		_ = self.textFieldShouldReturn(player_name)
-		viewDidLoad()
+//		viewDidLoad()
 	}
 }
 
