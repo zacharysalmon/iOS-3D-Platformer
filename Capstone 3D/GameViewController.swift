@@ -159,7 +159,7 @@ class GameViewController: UIViewController
 		
 		track_layer = scene.rootNode.childNode(withName: "track_layer", recursively: true)!
 //		track = scene.rootNode.childNode(withName: "track", recursively: true)!
-		track = Track(track: scene.rootNode.childNode(withName: "track", recursively: true)!, floor: scene.rootNode.childNode(withName: "floor", recursively: true)!, track_layer: track_layer)
+		track = Track(track: scene.rootNode.childNode(withName: "track", recursively: true)!, floor: scene.rootNode.childNode(withName: "floor", recursively: true)!)
 //
 //		track_layer_2 = track_layer_1.clone()
 //		track2 = Track(track: scene.rootNode.childNode(withName: "track", recursively: true)!, floor: scene.rootNode.childNode(withName: "floor", recursively: true)!, track_layer: track_layer_2)
@@ -309,7 +309,7 @@ class GameViewController: UIViewController
 		{
 			updateScore()
 			print("player: \(player.getPlayerPosition().z)")
-			track.loopTrack()
+			track.loopTrack(track_layer: track_layer)
 			loopObstacles()
 			placeCoins()
 		}
