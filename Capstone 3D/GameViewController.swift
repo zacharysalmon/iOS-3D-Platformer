@@ -14,43 +14,22 @@ import CloudKit
 
 class GameViewController: UIViewController
 {
-	var sceneView: SCNView!
+	@IBOutlet weak var sceneView: SCNView!
 	var scene: SCNScene!
 	var sprite_scene: OverlayScene!
 	var pause_menu: PauseMenu!
 	let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-//	let public_database = CKContainer.default().publicCloudDatabase
-//	let private_database = CKContainer.default().privateCloudDatabase
 	var leaderboard: [CKRecord] = []
 
 	
 	var player: Player!
-//	var player_position: SCNVector3 = SCNVector3(0.0, 0.0, 0.0)
-//	var player_velocity: SCNVector3? = SCNVector3(0.0, 0.0, 0.0)
-//	let starting_player_speed: Float = 1.3
-//	let max_player_speed: Float = 3.3
-//	var player_speed: Float = 1.3
-//	let player_speed_delta: CGFloat = 0.001
-//	let player_jump_height: Float = 5.0
-//	var player_coins: Int = 0
 	
 	var database: Database!
 	
 	var track: Track!
-//	var track2: Track!
-	//	var track_layer_2: SCNNode!
 	var track_layer: SCNNode!
 //	var floor: SCNNode!
-////	var track: SCNNode!
-//	let starting_track_position_z: Float = 0.0
-//	let starting_track_length: Float = 530.0
-//	let max_track_length: Float = 560.0
-//	var track_length: Float = 530.0
-//	var next_track_position_z: Float = -1060
-//	let floor_depth: Float = -30.0
-//	let obstacle_distance_buffer: Float = 80.0
 	
-//	var coins: Coins
 	var yellow_coin: Coin!
 	var yellow_coins_1: SCNNode!
 	var yellow_coins_2: SCNNode!
@@ -103,7 +82,7 @@ class GameViewController: UIViewController
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
-		print("view did appear")
+		print("gameview did appear")
 		player.setPlayerPosition(position: player.getPlayerPosition())
 		player.getPlayerNode().physicsBody?.velocity = player.getPlayerVelocity()
 		startCountdown()
@@ -165,9 +144,6 @@ class GameViewController: UIViewController
 		track_layer = scene.rootNode.childNode(withName: "track_layer", recursively: true)!
 //		track = scene.rootNode.childNode(withName: "track", recursively: true)!
 		track = Track(track: scene.rootNode.childNode(withName: "track", recursively: true)!, floor: scene.rootNode.childNode(withName: "floor", recursively: true)!)
-//
-//		track_layer_2 = track_layer_1.clone()
-//		track2 = Track(track: scene.rootNode.childNode(withName: "track", recursively: true)!, floor: scene.rootNode.childNode(withName: "floor", recursively: true)!, track_layer: track_layer_2)
 		
 //		floor = scene.rootNode.childNode(withName: "floor", recursively: true)!
 //		cam_1 = scene.rootNode.childNode(withName: "cam_1", recursively: true)!
@@ -200,11 +176,6 @@ class GameViewController: UIViewController
 		placeCoins()
 		loopCoins()
 		
-//		player_related = scene.rootNode.childNode(withName: "player_related", recursively: true)!
-		
-//		track_layer = scene.rootNode.childNode(withName: "track_layer", recursively: true)!
-//		track = scene.rootNode.childNode(withName: "track", recursively: true)!
-//		last_contact = track
 	}
 	
 	func setupSounds()
@@ -321,7 +292,7 @@ class GameViewController: UIViewController
 		if collisions_array["jump_sensor"] == true && collisions_array["clear_sensor"] == true
 		{
 			updateScore()
-			print("player: \(player.getPlayerPosition().z)")
+//			print("player: \(player.getPlayerPosition().z)")
 			track.loopTrack(track_layer: track_layer)
 			loopObstacles()
 			loopCoins()
@@ -334,7 +305,6 @@ class GameViewController: UIViewController
 				collisions_array[each.key] = false
 			}
 		}
-		//print("\(collisions_array)\n\n")
 	}
 
 	
@@ -342,10 +312,10 @@ class GameViewController: UIViewController
 	{
 		let coin_timer_end = NSDate.timeIntervalSinceReferenceDate
 		let coin_time_elapsed = coin_timer_end - self.coin_timer_start
-//		print("elapsed: \(elapsed)")
-		if coin_time_elapsed > 0.01
+		if coin_time_elapsed > 0.001
 		{
-			print("yellow")
+			print("elapsed: \(coin_time_elapsed)")
+//			print("yellow")
 			self.sprite_scene.score += 1
 			self.player.setPlayerCoins(coins: self.player.getPlayerCoins() + 1)
 		}
@@ -356,10 +326,10 @@ class GameViewController: UIViewController
 	{
 		let coin_timer_end = NSDate.timeIntervalSinceReferenceDate
 		let coin_time_elapsed = coin_timer_end - self.coin_timer_start
-//		print("elapsed: \(elapsed)")
-		if coin_time_elapsed > 0.01
+		if coin_time_elapsed > 0.001
 		{
-			print("red")
+			print("elapsed: \(coin_time_elapsed)")
+//			print("red")
 			self.sprite_scene.score += 5
 			self.player.setPlayerCoins(coins: self.player.getPlayerCoins() + 5)
 		}
@@ -368,7 +338,7 @@ class GameViewController: UIViewController
 	
 	func updateScore()
 	{
-		self.sprite_scene.score += 1
+		self.sprite_scene.score += 2
 		jump_count += 1
 		if jump_count % 3 == 0
 		{
@@ -428,7 +398,6 @@ class GameViewController: UIViewController
 				each.eulerAngles.z = -0.45
 				random_position.y = random_position.x.magnitude / 6.0
 			}
-		
 			each.position = random_position
 		}
 	}
@@ -440,19 +409,6 @@ class GameViewController: UIViewController
 		let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
 		return SCNVector3(random_x, random_y, random_z)
 	}
-	
-	func getCoinPositionVector(coin: Coin) -> SCNVector3
-	{
-		let random_x = CGFloat.random(in: -17.0 ... 17.0)
-		var random_y = CGFloat(3.0)
-		if coin.getCoinColor() == "red"
-		{
-			random_y = CGFloat(7.0)
-		}
-		let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
-		return SCNVector3(random_x, random_y, random_z)
-	}
-
 	
 	func placeCoins()
 	{
@@ -518,8 +474,18 @@ class GameViewController: UIViewController
 			each.position = getCoinPositionVector(coin: red_coin)
 			each.position.z -= track.getTrackLength()
 		}
-		
-		
+	}
+	
+	func getCoinPositionVector(coin: Coin) -> SCNVector3
+	{
+		let random_x = CGFloat.random(in: -17.0 ... 17.0)
+		var random_y = CGFloat(3.0)
+		if coin.getCoinColor() == "red"
+		{
+			random_y = CGFloat(7.0)
+		}
+		let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
+		return SCNVector3(random_x, random_y, random_z)
 	}
 	
 	func updateLevel()
@@ -539,8 +505,19 @@ class GameViewController: UIViewController
 			obstacle_layer_1.addChildNode(tree_node.clone())
 		}
 		
-//		print("speed: \(player.getPlayerSpeed()), track_length: \(track_length), next_track: \(next_track_position_z), tree_count: \(obstacle_layer.childNodes.count)")
 //		print("speed: \(player.getPlayerSpeed()), track_length: \(track.getTrackLength()), next_track: \(track.getNextTrackPositionZ()), tree_count: \(obstacle_layer_1.childNodes.count)")
+	}
+	
+	deinit
+	{
+		scene.rootNode.cleanup()
+		print("deinit")
+		for each in scene.rootNode.childNodes
+		   {
+			   each.geometry = nil
+			   each.removeFromParentNode()
+		   }
+		print("everything: \(scene.rootNode.childNodes)")
 	}
 	
 	
@@ -557,6 +534,7 @@ class GameViewController: UIViewController
 			self.player.getPlayerNode().removeFromParentNode()
 			sprite_scene.setHighScore()
 			database.saveToCloud(score: self.sprite_scene.score, player: player)
+			
 			openGameOverMenu()
 		}
 	}
@@ -665,6 +643,19 @@ extension GameViewController : SCNPhysicsContactDelegate
 		
 		updateCollisions(object: contact_node)
 		collisionHandler(player: player, object: contact_node)
+	}
+}
+
+extension SCNNode
+{
+	func cleanup()
+	{
+		for child in childNodes
+		{
+			print(child.name)
+			child.cleanup()
+		}
+		geometry = nil
 	}
 }
 

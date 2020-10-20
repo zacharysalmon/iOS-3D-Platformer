@@ -508,7 +508,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Capstone 3D/Capstone 3D.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "Capstone\\ 3D/art.scnassets";
 				DEVELOPMENT_TEAM = B237UTD4LC;
 				INFOPLIST_FILE = "$(SRCROOT)/Capstone 3D/Info.plist";
@@ -517,7 +517,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.capstone.zsalmon;
 				PRODUCT_NAME = "Capstone 3D";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -533,7 +533,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Capstone 3D/Capstone 3D.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "Capstone\\ 3D/art.scnassets";
 				DEVELOPMENT_TEAM = B237UTD4LC;
 				INFOPLIST_FILE = "$(SRCROOT)/Capstone 3D/Info.plist";
@@ -542,7 +542,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.capstone.zsalmon;
 				PRODUCT_NAME = "Capstone 3D";
 				PROVISIONING_PROFILE_SPECIFIER = "";

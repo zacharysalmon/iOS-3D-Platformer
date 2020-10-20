@@ -27,10 +27,7 @@ class Coin
 
 	init(coin_node: SCNNode!, coin_color: String)
 	{
-//		self.yellow_coin_node = yellow_coin_node
-//		self.red_coin_node = red_coin_node
-//		self.yellow_coins = yellow_coins
-//		self.red_coins = red_coins
+//		print("coin init")
 		self.coin_node = coin_node
 		self.coin_color = coin_color
 	}
@@ -58,6 +55,12 @@ class Coin
 
 //____________________________________________________________________________________
 	//Mutators
+	
+	deinit
+	{
+//		print("coin deinit")
+		self.coin_node.geometry = nil
+	}
 //
 //	func placeCoins(yellow_coins: SCNNode, red_coins: SCNNode, track: Track)
 //	{

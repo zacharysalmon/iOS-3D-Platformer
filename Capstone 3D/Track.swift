@@ -95,6 +95,10 @@ class Track
 
 //____________________________________________________________________________________
 	//Methods
+	
+	deinit {
+		self.track.geometry = nil
+	}
 
 	func loopTrack(track_layer: SCNNode)
 	{

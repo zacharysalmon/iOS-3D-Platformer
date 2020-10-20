@@ -16,9 +16,10 @@ class OverlayScene: SKScene
     var pause_node: SKSpriteNode!
     var score_node: SKLabelNode!
 	var game_scene: GameViewController!
-	var game_over_node: SKLabelNode!
 	var countdown_node: SKLabelNode!
+	var jump_node: SKSpriteNode!
 //	var play_again_node: SKSpriteNode!
+//	var game_over_node: SKLabelNode!
 
 
 	//size of the screen is (x: 414.0, y: 896.0)
@@ -42,7 +43,7 @@ class OverlayScene: SKScene
         didSet
 		{
             self.score_node.text = "Score: \(self.score)"
-			self.game_over_node.text = "Game Over"
+//			self.game_over_node.text = "Game Over"
         }
     }
     
@@ -57,6 +58,10 @@ class OverlayScene: SKScene
         self.pause_node.size = spriteSize
 		self.pause_node.position = CGPoint(x: size.width - spriteSize.width, y: spriteSize.height)
 		
+//		self.jump_node = SKSpriteNode(imageNamed: "jump_node")
+//		self.jump_node.size = CGSize(width: spriteSize.width * 2, height: spriteSize.height)
+//		self.jump_node.position = CGPoint(x: jump_node.size.width, y: spriteSize.height * 2)
+		
 //		self.play_again_node = SKSpriteNode(imageNamed: "play_again_button")
 //		self.play_again_node.size = CGSize(width: spriteSize * 4, height: spriteSize)
 //		self.play_again_node.position = play_again_node_position
@@ -70,12 +75,12 @@ class OverlayScene: SKScene
 		let score_node_position = CGPoint(x: size.width / 2, y: size.height * 0.8)
 		self.score_node.position = score_node_position
 		
-		self.game_over_node = SKLabelNode(text: "Game Over")
-        self.game_over_node.fontName = "Georgia-Bold"
-		self.game_over_node.fontColor = UIColor.black
-        self.game_over_node.fontSize = 40
-		self.game_over_node.position = CGPoint(x: size.width / 2, y: size.height / 2)
-		self.game_over_node.isHidden = true
+//		self.game_over_node = SKLabelNode(text: "Game Over")
+//        self.game_over_node.fontName = "Georgia-Bold"
+//		self.game_over_node.fontColor = UIColor.black
+//        self.game_over_node.fontSize = 40
+//		self.game_over_node.position = CGPoint(x: size.width / 2, y: size.height / 2)
+//		self.game_over_node.isHidden = true
 		
 		self.countdown_node = SKLabelNode(text: "3")
 		self.countdown_node.fontName = "Georgia-Bold"
@@ -86,9 +91,11 @@ class OverlayScene: SKScene
 		
 		
         self.addChild(self.pause_node)
+//		self.addChild(self.jump_node)
+		
+//		self.addChild(self.game_over_node)
 //		self.addChild(self.play_again_node)
         self.addChild(self.score_node)
-		self.addChild(self.game_over_node)
 		self.addChild(self.countdown_node)
 		
     }
@@ -132,13 +139,26 @@ class OverlayScene: SKScene
 //		}
 	}
 	
+	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
+	{
+//		let location = touches.first?.location(in: self)
+//		if jump_node.contains(location!)
+//		{
+//			print("Overlay")
+//			if !isPaused
+//			{
+//				game_scene.player.jumpPlayer()
+//			}
+//		}
+	}
+	
 	func setHighScore()
 	{
 		UserDefaults.standard.setValue(self.score, forKey: "last_score")
-		if UserDefaults.standard.value(forKey: "high_score") == nil
+		if UserDefaults.standard.value(forKey: "high_score") != nil
 		{
 			let old_high_score: Int = UserDefaults.standard.value(forKey: "high_score") as! Int
-			print(old_high_score)
+//			print(old_high_score)
 			if old_high_score < self.score
 			{
 				UserDefaults.standard.setValue(self.score, forKey: "high_score")
@@ -153,11 +173,11 @@ class OverlayScene: SKScene
 	
 	func gameOverText()
 	{
-		self.game_over_node.isHidden = false
+//		self.game_over_node.isHidden = false
 //		self.play_again_node.isHidden = false
 //		self.play_again_node.isUserInteractionEnabled = true
 //		self.pause_node.isHidden = true
-		self.game_over_node.position.y = score_node.position.y + game_over_node.fontSize
+//		self.game_over_node.position.y = score_node.position.y + game_over_node.fontSize
 	}
 	
 	
