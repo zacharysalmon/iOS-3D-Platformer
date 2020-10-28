@@ -61,7 +61,7 @@ class Leaderboard: UITableViewController
 
 			public_database.fetchAllRecordZones
 			{ zones, error in
-				guard let zones = zones, error == nil else
+				guard let _ = zones, error == nil else
 				{
 					print(error!)
 					return
@@ -84,7 +84,9 @@ class Leaderboard: UITableViewController
 				let query_operation = CKQueryOperation(query: query)
 				query_operation.desiredKeys = ["player_score", "player_coins", "player_name", "user_reference"]
 				query_operation.queuePriority = .veryHigh
-				query_operation.resultsLimit = kJUSTUnlimited
+				let MAX_RESULTS_LIMIT = 1000000
+				query_operation.resultsLimit = MAX_RESULTS_LIMIT
+				
 				self.public_database.add(query_operation)
 				query_operation.recordFetchedBlock =
 					{(record:CKRecord!) -> Void in
@@ -95,11 +97,11 @@ class Leaderboard: UITableViewController
 								if !self.user_id_list.contains(key.1 as! String)
 								{
 									self.user_id_list.append(key.1 as! String)
-									print("user_id: \(self.user_id_list.count)")
+//									print("user_id: \(self.user_id_list.count)")
 									if self.leaderboard.count < 50
 									{
 										self.leaderboard.append(record)
-										print("leaderboard: \(self.leaderboard.count)")
+//										print("leaderboard: \(self.leaderboard.count)")
 									}
 								}
 							}
