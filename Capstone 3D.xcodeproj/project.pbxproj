@@ -508,7 +508,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Capstone 3D/Capstone 3D.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "Capstone\\ 3D/art.scnassets";
 				DEVELOPMENT_TEAM = B237UTD4LC;
 				INFOPLIST_FILE = "$(SRCROOT)/Capstone 3D/Info.plist";
@@ -533,7 +533,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Capstone 3D/Capstone 3D.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "Capstone\\ 3D/art.scnassets";
 				DEVELOPMENT_TEAM = B237UTD4LC;
 				INFOPLIST_FILE = "$(SRCROOT)/Capstone 3D/Info.plist";
