@@ -53,135 +53,58 @@ class Leaderboard: UITableViewController
 	
 	func queryFromDatabase()
 	{
-		print("queryFromDatabase\n")
-//		let recordType = "Player"
-//		let alwaysTrue = NSPredicate(value: true)
-//		let query = CKQuery(recordType: recordType, predicate: alwaysTrue)
-//		let sort_score = NSSortDescriptor(key: "player_score", ascending: false)
-//		let sort_coins = NSSortDescriptor(key: "player_coins", ascending: false)
-//		let sort_name = NSSortDescriptor(key: "player_name", ascending: false)
-//		let sort_id = NSSortDescriptor(key: "user_reference", ascending: true)
-//		query.sortDescriptors = [sort_score, sort_coins, sort_name, sort_id]
-//
-//		let query_operation = CKQueryOperation(query: query)
-//		query_operation.desiredKeys = ["player_score", "player_coins", "player_name", "user_reference"]
-//		query_operation.queuePriority = .veryHigh
-//		query_operation.resultsLimit = 101
-//
-//		query_operation.recordFetchedBlock = {(record:CKRecord!) -> Void in
-//			print(record)
-//			self.leaderboard.append(record)
-//		}
-//		print("lead: \(leaderboard.count)")
-//
-//		query_operation.queryCompletionBlock =
-//			{ (cursor, error) in
-//				print("here")
-//			DispatchQueue.main.async
-//			{
-//				if (error != nil)
-//				{
-//					print("Failed to get records. Error:\n \(String(describing: error))")
-//				}
-//				else
-//				{
-//					print("No error")
-//				}
-//			}
-//			if cursor != nil
-//			{
-//				let new_operation = CKQueryOperation(cursor: cursor!)
-//				new_operation.recordFetchedBlock = {(record: CKRecord!) -> Void in
-//					self.leaderboard.append(record)
-//				}
-//				print("lead2: \(self.leaderboard.count)")
-//				new_operation.queryCompletionBlock = query_operation.queryCompletionBlock
-//
-//				self.public_database.add(new_operation)
-//			}
-//			else
-//			{
-//				print("leaderboard.count \(self.leaderboard.count)")
-//			}
-//
-//		}
-//		reloadLeaderboard(leaderboard)
+		print("\nqueryFromDatabase\n")
 		for container in containers
 		{
 			// User data should be stored in the private database.
 
 
 			public_database.fetchAllRecordZones
-				{ zones, error in
-					guard let zones = zones, error == nil else
-					{
-						print(error!)
-						return
-					}
-
-				// The true predicate represents a query for all records.
-				let alwaysTrue = NSPredicate(value: true)
-
-				for zone in zones
+			{ zones, error in
+				guard let zones = zones, error == nil else
 				{
-					for recordType in self.containerRecordTypes[container as! CKContainer] ?? []
-					{
-						let query = CKQuery(recordType: recordType, predicate: alwaysTrue)
+					print(error!)
+					return
+				}
+
+			// The true predicate represents a query for all records.
+			let alwaysTrue = NSPredicate(value: true)
+
+			for recordType in self.containerRecordTypes[container as! CKContainer] ?? []
+			{
+				let query = CKQuery(recordType: recordType, predicate: alwaysTrue)
 
 
-						let sort_score = NSSortDescriptor(key: "player_score", ascending: false)
-						let sort_coins = NSSortDescriptor(key: "player_coins", ascending: false)
-						let sort_name = NSSortDescriptor(key: "player_name", ascending: false)
-						let sort_id = NSSortDescriptor(key: "user_reference", ascending: true)
-						query.sortDescriptors = [sort_score, sort_coins, sort_name, sort_id]
+				let sort_score = NSSortDescriptor(key: "player_score", ascending: false)
+				let sort_coins = NSSortDescriptor(key: "player_coins", ascending: false)
+				let sort_name = NSSortDescriptor(key: "player_name", ascending: false)
+				let sort_id = NSSortDescriptor(key: "user_reference", ascending: true)
+				query.sortDescriptors = [sort_score, sort_coins, sort_name, sort_id]
 //
-						let query_operation = CKQueryOperation(query: query)
-						query_operation.desiredKeys = ["player_score", "player_coins", "player_name", "user_reference"]
-						query_operation.queuePriority = .veryHigh
-						query_operation.resultsLimit = 101
-						self.public_database.add(query_operation)
-						query_operation.recordFetchedBlock = {(record:CKRecord!) -> Void in
-							self.leaderboard.append(record)
-						}
-						self.public_database.perform(query, inZoneWith: zone.zoneID)
-						{ records, error in
-							guard let records = records, error == nil else
+				let query_operation = CKQueryOperation(query: query)
+				query_operation.desiredKeys = ["player_score", "player_coins", "player_name", "user_reference"]
+				query_operation.queuePriority = .veryHigh
+				query_operation.resultsLimit = kJUSTUnlimited
+				self.public_database.add(query_operation)
+				query_operation.recordFetchedBlock =
+					{(record:CKRecord!) -> Void in
+						for key in record
+						{
+							if key.0 == "user_reference"
 							{
-								 // Create and configure the alert controller.
-								 let alert = UIAlertController(title: "Something went wrong", message: error.debugDescription,
-									   preferredStyle: .alert)
-
-								 self.present(alert, animated: true)
+								if !self.user_id_list.contains(key.1 as! String)
 								{
-									// The alert was presented
-								}
-								print("An error occurred fetching these records.")
-								return
-							}
-							var count = 0
-							for record in records
-							{
-								count += 1
-								print(count)
-								for key in record
-								{
-									if key.0 == "user_reference"
+									self.user_id_list.append(key.1 as! String)
+									print("user_id: \(self.user_id_list.count)")
+									if self.leaderboard.count < 50
 									{
-										if !self.user_id_list.contains(key.1 as! String)
-										{
-											self.user_id_list.append(key.1 as! String)
-											print("user_id: \(self.user_id_list.count)")
-											if self.user_id_list.count < 50
-											{
-												self.leaderboard.append(record)
-												print("leaderboard: \(self.leaderboard.count)")
-											}
-										}
+										self.leaderboard.append(record)
+										print("leaderboard: \(self.leaderboard.count)")
 									}
 								}
 							}
-							self.reloadLeaderboard(records)
 						}
+						self.reloadLeaderboard(self.leaderboard)
 					}
 				}
 			}
@@ -193,23 +116,19 @@ class Leaderboard: UITableViewController
 	// according to your app's unique record types.
 	func reloadLeaderboard(_ records: [CKRecord])
 	{
-		print("reloadLeaderboard")
 		DispatchQueue.main.async
 		{
 			self.tableView.reloadData()
 		}
-		print("done reloading")
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int
 	{
-//		print("numberOfSections")
 		return 1
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-//		print("numberOfRowsInSection")
 		return leaderboard.count
 	}
 

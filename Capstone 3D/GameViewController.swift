@@ -652,7 +652,7 @@ extension SCNNode
 	{
 		for child in childNodes
 		{
-			print(child.name)
+			print(child.name!)
 			child.cleanup()
 		}
 		geometry = nil

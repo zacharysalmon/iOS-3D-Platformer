@@ -83,7 +83,6 @@ class Database
 				player_record.setValue(score, forKey: "player_score")
 				player_record.setValue(player.getPlayerCoins(), forKey: "player_coins")
 				let operation = CKModifyRecordsOperation(recordsToSave: [player_record], recordIDsToDelete: nil)
-//				print("player_record: \(player_record)")
 				self.PUBLIC_DATABASE.add(operation)
 			}
 		}

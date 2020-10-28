@@ -20,7 +20,14 @@ class MainMenu: UIViewController
 		super.viewDidLoad()
 		player_name.delegate = self
 		let user_defaults = UserDefaults.standard
-		player_name.text = user_defaults.string(forKey: "player_name")
+		if user_defaults.string(forKey: "player_name") != ""
+		{
+			player_name.text = user_defaults.string(forKey: "player_name")
+		}
+		else
+		{
+			user_defaults.setValue("player_name", forKey: "")
+		}
 		if user_defaults.value(forKey: "high_score") != nil
 		{
 			player_high_score.text = user_defaults.string(forKey: "high_score")
