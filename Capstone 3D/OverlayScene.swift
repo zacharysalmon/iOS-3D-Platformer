@@ -49,7 +49,6 @@ class OverlayScene: SKScene
     init(size: CGSize, game_scene: GameViewController!)
 	{
         super.init(size: size)
-		print("size_h: \(size.height), size_w: \(size.width)")
 		self.game_scene = game_scene
         
 		let spriteSize = CGSize(width: 50.0, height: 50.0)
@@ -116,7 +115,6 @@ class OverlayScene: SKScene
 			if old_high_score < self.score
 			{
 				UserDefaults.standard.setValue(self.score, forKey: "high_score")
-				print("New_high_score \(String(describing: UserDefaults.standard.value(forKey: "high_score")))")
 			}
 		}
 		else

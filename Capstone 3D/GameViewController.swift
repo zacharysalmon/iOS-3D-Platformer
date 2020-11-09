@@ -91,7 +91,6 @@ class GameViewController: UIViewController
 	*/
 	override func viewDidAppear(_ animated: Bool)
 	{
-		print("gameview did appear")
 		player.setPlayerPosition(position: player.getPlayerPosition())
 		player.getPlayerNode().physicsBody?.velocity = player.getPlayerVelocity()
 		startCountdown()
@@ -210,7 +209,6 @@ class GameViewController: UIViewController
 		{
 			repeat
 			{
-				print(self.sprite_scene.countdown)
 				sleep(1)
 				self.sprite_scene.countdown -= 1
 			} while sprite_scene.countdown > 0
@@ -544,7 +542,6 @@ class GameViewController: UIViewController
 		if tree_time_elapsed > 1.0
 		{
 			collisions_array["game_over"] = true
-			print("Game Over")
 			self.player.getPlayerNode().removeFromParentNode()
 			sprite_scene.setHighScore()
 			database.saveToCloud(score: self.sprite_scene.score, player: player)
@@ -558,7 +555,6 @@ class GameViewController: UIViewController
 	*/
 	func unpauseWorld()
 	{
-		print("Unpaused")
 		if is_paused
 		{
 			is_paused = false

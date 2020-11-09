@@ -26,7 +26,6 @@ class Database
 	*/
 	init()
 	{
-		print("Database Initialized")
 	}
 	
 	/*

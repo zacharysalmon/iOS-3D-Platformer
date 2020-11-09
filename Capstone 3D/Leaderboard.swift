@@ -65,7 +65,6 @@ class Leaderboard: UITableViewController
 	*/
 	func queryFromDatabase()
 	{
-		print("\nqueryFromDatabase\n")
 		for container in containers
 		{
 			// User data should be stored in the private database.
@@ -108,11 +107,9 @@ class Leaderboard: UITableViewController
 								if !self.user_id_list.contains(key.1 as! String)
 								{
 									self.user_id_list.append(key.1 as! String)
-//									print("user_id: \(self.user_id_list.count)")
 									if self.leaderboard.count < 50
 									{
 										self.leaderboard.append(record)
-//										print("leaderboard: \(self.leaderboard.count)")
 									}
 								}
 							}
@@ -157,7 +154,6 @@ class Leaderboard: UITableViewController
 	*/
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-//		print("cellForRowAt")
 		let cell = Bundle.main.loadNibNamed("TableViewCell", owner: self, options: nil)?.first as! TableViewCell
 		if leaderboard.count > 0
 		{

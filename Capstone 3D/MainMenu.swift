@@ -40,7 +40,6 @@ class MainMenu: UIViewController
 		{
 			player_high_score.text = "0"
 		}
-		print("MainMenu viewdidload()")
 	}
 	
 	/*
@@ -88,7 +87,6 @@ extension MainMenu : UITextFieldDelegate
 	{
 		let user_defaults = UserDefaults.standard
 		user_defaults.setValue(player_name.text, forKey: "player_name")
-		print("saving: \(String(describing: player_name.text)))")
 		return textField.resignFirstResponder()
 	}
 }

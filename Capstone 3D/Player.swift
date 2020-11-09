@@ -35,7 +35,6 @@ class Player
 	*/
 	init(player_node: SCNNode!, selfie_stick_node: SCNNode!)
 	{
-		print("player init")
 		self.player_node = player_node
 		self.selfie_stick_node = selfie_stick_node
 		self.player_position = SCNVector3(0.0, 0.0, 0.0)
@@ -178,12 +177,10 @@ class Player
 			{
 				(_) in
 				self.has_jumped = false
-//				print("Jump allowed now")
 			}
 			
 			let action_sequence = SCNAction.sequence([wait_action, jump_action])
 			
-//			print("Jumping")
 			self.player_node.runAction(action_sequence)
 		}
 		
@@ -216,7 +213,6 @@ class Player
 	*/
 	deinit
 	{
-		print("player deinit")
 		self.player_node.geometry = nil
 	}
 }
