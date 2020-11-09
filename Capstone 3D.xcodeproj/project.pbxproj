@@ -30,6 +30,7 @@
 		38E57E06251A84E90046ED51 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38214DD124EDD26800503FBB /* GameKit.framework */; };
 		38E6753E24B8AFA7006A21A0 /* MotionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E6753D24B8AFA7006A21A0 /* MotionHelper.swift */; };
 		38E6754124B8B120006A21A0 /* VectorOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E6754024B8B120006A21A0 /* VectorOperations.swift */; };
+		38E809D22559CA5D00F6B652 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E809D12559CA5D00F6B652 /* Tree.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		38DC5BD8251E4DB900B12540 /* GameOverMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverMenu.swift; sourceTree = "<group>"; };
 		38E6753D24B8AFA7006A21A0 /* MotionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionHelper.swift; sourceTree = "<group>"; };
 		38E6754024B8B120006A21A0 /* VectorOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorOperations.swift; sourceTree = "<group>"; };
+		38E809D12559CA5D00F6B652 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				381A135B24B6677F00774855 /* GameViewController.swift */,
 				380DFC8C25369A21004A56CF /* Track.swift */,
 				380DFC942537460D004A56CF /* Coin.swift */,
+				38E809D12559CA5D00F6B652 /* Tree.swift */,
 				38C9E2DE2539F15C00F9C163 /* Database.swift */,
 				38214DD324F02F0700503FBB /* Leaderboard.swift */,
 				380DFC8125364740004A56CF /* Player.swift */,
@@ -318,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38E809D22559CA5D00F6B652 /* Tree.swift in Sources */,
 				38E6754124B8B120006A21A0 /* VectorOperations.swift in Sources */,
 				3842D33C24D866EF00839E24 /* OverlayScene.swift in Sources */,
 				386CCC9A24DC9392005113BD /* MainMenu.swift in Sources */,
@@ -508,7 +512,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Capstone 3D/Capstone 3D.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "Capstone\\ 3D/art.scnassets";
 				DEVELOPMENT_TEAM = B237UTD4LC;
 				INFOPLIST_FILE = "$(SRCROOT)/Capstone 3D/Info.plist";
@@ -533,7 +537,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Capstone 3D/Capstone 3D.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "Capstone\\ 3D/art.scnassets";
 				DEVELOPMENT_TEAM = B237UTD4LC;
 				INFOPLIST_FILE = "$(SRCROOT)/Capstone 3D/Info.plist";

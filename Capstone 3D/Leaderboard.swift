@@ -21,6 +21,7 @@ struct cellData
 class Leaderboard: UITableViewController
 {
 	@IBOutlet weak var leaderboardView: UITableView!
+	let MAX_RESULTS_LIMIT = 1000000
 	
 	let public_database = CKContainer.default().publicCloudDatabase
 	let private_database = CKContainer.default().privateCloudDatabase
@@ -37,6 +38,10 @@ class Leaderboard: UITableViewController
 	var first_row: Bool = true
 	
 	
+	/*
+		This function initializes cell data and starts the query on the database once the view
+		loads.
+	*/
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
@@ -45,12 +50,19 @@ class Leaderboard: UITableViewController
 		queryFromDatabase()
 	}
 	
+	/*
+		This function is tied to a button on the screen. It dismisses the current view controller
+		and goes to the previous view controller which has to be the main menu.
+	*/
 	@IBAction func backToMenuTapped(_ sender: Any)
 	{
-//		print("Back tapped")
 		dismiss(animated: true, completion: nil)
 	}
 	
+	/*
+		Sends a query to the database that sorts through and gets the highest score for each
+		distinct user. It sorts them into an array and sends them to be loaded into the view.
+	*/
 	func queryFromDatabase()
 	{
 		print("\nqueryFromDatabase\n")
@@ -84,8 +96,7 @@ class Leaderboard: UITableViewController
 				let query_operation = CKQueryOperation(query: query)
 				query_operation.desiredKeys = ["player_score", "player_coins", "player_name", "user_reference"]
 				query_operation.queuePriority = .veryHigh
-				let MAX_RESULTS_LIMIT = 1000000
-				query_operation.resultsLimit = MAX_RESULTS_LIMIT
+				query_operation.resultsLimit = self.MAX_RESULTS_LIMIT
 				
 				self.public_database.add(query_operation)
 				query_operation.recordFetchedBlock =
@@ -113,9 +124,10 @@ class Leaderboard: UITableViewController
 		}
 	}
 	
-	// Utility function to display records.
-	// Customize it to display records appropriately
-	// according to your app's unique record types.
+	
+	/*
+		Receives an array of records and loads it into the table.
+	*/
 	func reloadLeaderboard(_ records: [CKRecord])
 	{
 		DispatchQueue.main.async
@@ -124,16 +136,25 @@ class Leaderboard: UITableViewController
 		}
 	}
 	
+	/*
+		There is only 1 section needed in this leaderboard, so this function returns 1.
+	*/
 	override func numberOfSections(in tableView: UITableView) -> Int
 	{
 		return 1
 	}
-
+	
+	/*
+		The number of rows in this table is the amount of records that are in the leaderboard.
+	*/
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
 		return leaderboard.count
 	}
-
+	
+	/*
+		Prints out the contents of a single record to the next available cell in the table. 
+	*/
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 //		print("cellForRowAt")

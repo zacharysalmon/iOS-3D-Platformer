@@ -1,6 +1,6 @@
 //
 //  MainMenu.swift
-//  HitTheTree
+//  Capstone 3D
 //
 //  Created by Zack Salmon on 8/6/20.
 //  Copyright © 2020 Zack Salmon. All rights reserved.
@@ -15,6 +15,10 @@ class MainMenu: UIViewController
 	@IBOutlet weak var player_high_score: UILabel!
 	
 	
+	/*
+		Loads the main menu. This puts all buttons, labels, scores, text fields, and text on the
+		screen.
+	*/
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
@@ -39,13 +43,10 @@ class MainMenu: UIViewController
 		print("MainMenu viewdidload()")
 	}
 	
-	@IBAction func reloadView(_ sender: Any)
-	{
-		print("MainMenu reloadView()")
-//		viewDidLoad()
-	}
-	
-	
+	/*
+		This function is tied to the play button on the main menu. It loads the game view and
+		presents it to the screen.
+	*/
 	@IBAction func playTapped(_ sender: Any)
 	{
 		let scnStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -58,6 +59,10 @@ class MainMenu: UIViewController
 		present(game_view, animated: true, completion: nil)
 	}
 	
+	/*
+		This function is tied to the leaderboard button on the main menu. It loads the leaderboard
+		view and presents it to the screen.
+	*/
 	@IBAction func leaderboardTapped(_ sender: Any)
 	{
 		let scnStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -70,22 +75,15 @@ class MainMenu: UIViewController
 		present(game_view, animated: true, completion: nil)
 	}
 	
-//	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-//	{
-//		let game_vc = segue.destination as? GameViewController
-//		print("Player name: \(String(describing: player_name.text))")
-//	}
-	
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-	{
-//		_ = self.textFieldShouldReturn(player_name)
-//		viewDidLoad()
-	}
 }
 
 extension MainMenu : UITextFieldDelegate
 {
 	
+	/*
+		This function makes it so the editable text field can keep and maintain the name of the
+		player and stores it on the device. 
+	*/
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool
 	{
 		let user_defaults = UserDefaults.standard

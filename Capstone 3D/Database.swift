@@ -21,27 +21,44 @@ class Database
 	private let containerRecordTypes: [CKContainer: [String]] = [CKContainer.default() : ["Player"]]
 	
 	
+	/*
+		Confirms that the database was properly initialized.
+	*/
 	init()
 	{
 		print("Database Initialized")
 	}
 	
+	/*
+		Returns the public database of the CloudKit container.
+	*/
 	func getPublicDatabase() -> CKDatabase
 	{
 		return self.PUBLIC_DATABASE
 	}
 	
+	/*
+		Returns the private database of the CloudKit container.
+	*/
 	func getPrivateDatabase() -> CKDatabase
 	{
 		return self.PRIVATE_DATABASE
 	}
 	
+	/*
+		Returns the default container of the project.
+	*/
 	func getDefaultContainer() -> CKContainer
 	{
 		return self.DEFAULT_CONTAINER
 	}
 	
 	
+	/*
+		Accesses the database to get the user reference for the current user. Uses that value to
+		update the database with the new data entries for the Player record. Saves the Player
+		record into the public database. 
+	*/
 	func saveToCloud(score: Int, player: Player)
 	{
 //		var user_reference = String()

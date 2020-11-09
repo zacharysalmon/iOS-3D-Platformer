@@ -23,7 +23,14 @@ class Track
 
 	private var track_length: Float
 	private var next_track_position_z: Float
-
+	
+	/*
+		Initializes a Track object with a track node and a floor node.
+		@param track the node that is tied to the track node in the scene that the player slides on.
+		@param floor the node that is tied to the floor node in the scene that signals game over
+		from falling.
+	
+	*/
 	init(track: SCNNode!, floor: SCNNode!)
 	{
 		self.track = track
@@ -34,47 +41,74 @@ class Track
 
 //____________________________________________________________________________________
 	//Accessors
-
+	
+	/*
+		Returns the track node.
+	*/
 	func getTrack() -> SCNNode
 	{
 		return self.track
 	}
-
+	
+	/*
+		Returns the floor node.
+	*/
 	func getFloor() -> SCNNode
 	{
 		return self.floor
 	}
-
+	
+	/*
+		Returns the length of the track.
+	*/
 	func getTrackLength() -> Float
 	{
 		return self.track_length
 	}
-
+	
+	/*
+		Returns the z coordinate of the next track position.
+	*/
 	func getNextTrackPositionZ() -> Float
 	{
 		return self.next_track_position_z
 	}
-
+	
+	/*
+		Returns the z coordinate of the starting track position.
+	*/
 	func getStartingTrackPositionZ() -> Float
 	{
 		return self.STARTING_TRACK_POSITION_Z
 	}
-
+	
+	/*
+		Returns the length of the track at the start of the game.
+	*/
 	func getStartingTrackLength() -> Float
 	{
 		return self.STARTING_TRACK_LENGTH
 	}
-
+	
+	/*
+		Returns the maximum allowed length of the track.
+	*/
 	func getMaxTrackLength() -> Float
 	{
 		return self.MAX_TRACK_LENGTH
 	}
-
+	
+	/*
+		Returns the y coordinate of the floor.
+	*/
 	func getFloorDepth() -> Float
 	{
 		return self.FLOOR_DEPTH
 	}
-
+	
+	/*
+		Returns the buffer distance between obstacles on tracks.
+	*/
 	func getObstacleDistanceBuffer() -> Float
 	{
 		return self.OBSTACLE_DISTANCE_BUFFER
@@ -83,11 +117,18 @@ class Track
 //____________________________________________________________________________________
 	//Mutators
 
+	
+	/*
+		Changes the length of the track.
+	*/
 	func setTrackLength(track_length: Float)
 	{
 		self.track_length = track_length
 	}
-
+	
+	/*
+		Changes the z coordinate of the next track position.
+	*/
 	func setNextTrackPositionZ(next_track_position_z: Float)
 	{
 		self.next_track_position_z = next_track_position_z
@@ -96,10 +137,20 @@ class Track
 //____________________________________________________________________________________
 	//Methods
 	
-	deinit {
+	
+	/*
+		Deinitializes memory allocated for the track geometry.
+	*/
+	deinit
+	{
 		self.track.geometry = nil
 	}
 
+	
+	/*
+		Loops the track of a given track layer.
+		@param track_layer the track layer that needs to be looped.
+	*/
 	func loopTrack(track_layer: SCNNode)
 	{
 		let old_track: SCNNode! = track_layer.childNodes.first

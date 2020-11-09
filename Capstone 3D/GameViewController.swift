@@ -1,6 +1,6 @@
 //
 //  GameViewController.swift
-//  HitTheTree
+//  Capstone 3D
 //
 //  Created by Zack Salmon on 7/8/20.
 //  Copyright © 2020 Zack Salmon. All rights reserved.
@@ -18,47 +18,35 @@ class GameViewController: UIViewController
 	var scene: SCNScene!
 	var sprite_scene: OverlayScene!
 	var pause_menu: PauseMenu!
-	let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-	var leaderboard: [CKRecord] = []
 
-	
 	var player: Player!
-	
 	var database: Database!
 	
 	var track: Track!
 	var track_layer: SCNNode!
-//	var floor: SCNNode!
 	
 	var yellow_coin: Coin!
 	var yellow_coins_1: SCNNode!
 	var yellow_coins_2: SCNNode!
 	var yellow_coin_node: SCNNode!
 	
+	var red_coin: Coin!
 	var red_coins_1: SCNNode!
 	var red_coins_2: SCNNode!
 	var red_coin_node: SCNNode!
-	var red_coin: Coin!
 	
-// All nodes that appear in the scene
-//  var selfie_stick_node: SCNNode!
-//	var cam_1: SCNNode!
-	
+	var tree_node: Tree!
 	var obstacle_layer_1: SCNNode!
 	var obstacle_layer_2: SCNNode!
-	var tree_node: SCNNode!
-	var last_contact: SCNNode!
 	
 	//Various numbers used in calculations and constant positions.
-	let starting_point: SCNVector3 =  SCNVector3(0.0, 0.5, 0.0)
-	var count = 0
+	let STARTING_POINT: SCNVector3 =  SCNVector3(0.0, 0.5, 0.0)
+	let MAX_NUMBER_OF_TREES: Int = 20
+	let COIN_MINIMUM_HIT_TIME: Double = 0.001
 	var coin_timer_start = Date.timeIntervalSinceReferenceDate
 	var tree_timer_start = Date.timeIntervalSinceReferenceDate
 	var jump_count = 0
-	
-	
 	var number_of_trees: Int = 10
-	let max_number_of_trees: Int = 25
 	var number_of_coins: Int = 5
 	
 	// Bit masks for each of the categories of objects that are involved in collisions.
@@ -71,15 +59,36 @@ class GameViewController: UIViewController
 									  "jump_sensor" : false,
 									  "clear_sensor" : false]
 	
-//	var count: Int = 0
-//	var jump_start: TimeInterval = Date.timeIntervalSinceReferenceDate
-//	var has_jumped: Bool = false
 	var is_paused: Bool = true
 	var start_of_game: Bool = true
 	
-	var sounds: [String: SCNAudioSource] = [:]
-
+//__________________________________________________________________________________________________
 	
+	/*
+		This function loads the view after checking the bounds for the iOS device screen.
+	*/
+	override func loadView()
+	{
+	   let scnView = SCNView(frame: UIScreen.main.bounds, options: nil)
+	   self.view = scnView
+	 }
+	
+	/*
+		This function sets up the scene that renders the graphics, the nodes within the world scene,
+		and any sounds associated with the gameplay.
+	*/
+    override func viewDidLoad()
+	{
+		super.viewDidLoad()
+		setupScene()
+		setupNodes()
+		setupSounds()
+    }
+	
+	/*
+		This function puts the player in its position and starts the countdown for the game to
+		begin.
+	*/
 	override func viewDidAppear(_ animated: Bool)
 	{
 		print("gameview did appear")
@@ -88,20 +97,13 @@ class GameViewController: UIViewController
 		startCountdown()
 	}
 	
-    override func viewDidLoad()
-	{
-		super.viewDidLoad()
-		setupScene()
-		setupNodes()
-//		setupSounds()
-    }
 	
-	override func loadView()
-	{
-	   let scnView = SCNView(frame: UIScreen.main.bounds, options: nil)
-	   self.view = scnView
-	 }
-	
+	/*
+		This function sets up the sceneView and the delegate for the physicsWorld to allow
+		interactions to take place.
+		It sets up the required touch mechanics such as swiping and instantiates the overlay
+		scene.
+	*/
 	func setupScene()
 	{
 		sceneView = (self.view as! SCNView)
@@ -112,11 +114,8 @@ class GameViewController: UIViewController
 		
 		scene.physicsWorld.contactDelegate = self
 		
-		
 		self.sprite_scene = OverlayScene(size: self.view.bounds.size, game_scene: self)
 		self.sceneView.overlaySKScene = self.sprite_scene
-		
-		self.pause_menu = PauseMenu(game_scene: self)
 		
 		
 		let swipe_recognizer = UIPanGestureRecognizer()
@@ -125,43 +124,33 @@ class GameViewController: UIViewController
 		sceneView.addGestureRecognizer(swipe_recognizer)
 		
 		sceneView.preferredFramesPerSecond = 60
-//		sceneView.showsStatistics = true
-//		sceneView.debugOptions = .showPhysicsShapes
-//		sceneView.allowsCameraControl = true
-		
 		
 	}
 	
+	/*
+		This function sets up and ties all nodes to their objects. The nodes are pulled from the
+		already established scene and get applied to their respective objects.
+	*/
 	func setupNodes()
 	{
-//		everything_node = scene.rootNode.childNode(withName: "everything", recursively: true)!
 		player = Player(player_node: scene.rootNode.childNode(withName: "player", recursively: true)!, selfie_stick_node: scene.rootNode.childNode(withName: "selfie_stick", recursively: true)!)
-//		selfie_stick_node = scene.rootNode.childNode(withName: "selfie_stick", recursively: true)!
 		
 		
 		database = Database()
 		
 		track_layer = scene.rootNode.childNode(withName: "track_layer", recursively: true)!
-//		track = scene.rootNode.childNode(withName: "track", recursively: true)!
 		track = Track(track: scene.rootNode.childNode(withName: "track", recursively: true)!, floor: scene.rootNode.childNode(withName: "floor", recursively: true)!)
-		
-//		floor = scene.rootNode.childNode(withName: "floor", recursively: true)!
-//		cam_1 = scene.rootNode.childNode(withName: "cam_1", recursively: true)!
 		
 		obstacle_layer_1 = scene.rootNode.childNode(withName: "obstacle_layer_1", recursively: true)!
 		obstacle_layer_2 = scene.rootNode.childNode(withName: "obstacle_layer_2", recursively: true)!
-		tree_node = scene.rootNode.childNode(withName: "tree", recursively: true)!
+		tree_node = Tree(tree_node: scene.rootNode.childNode(withName: "tree", recursively: true)!)
 		for i in 0...number_of_trees
 		{
-			obstacle_layer_1.insertChildNode(tree_node.clone(), at: i)
-			obstacle_layer_2.insertChildNode(tree_node.clone(), at: i)
+			obstacle_layer_1.insertChildNode(tree_node.getTreeNode().clone(), at: i)
+			obstacle_layer_2.insertChildNode(tree_node.getTreeNode().clone(), at: i)
 		}
-//		print("obstacles 1: \(obstacle_layer_1.childNodes.count)")
-//		print("obstacles 2: \(obstacle_layer_2.childNodes.count)")
 		placeObstacles()
 		loopObstacles()
-		
-		
 		
 		yellow_coins_1 = scene.rootNode.childNode(withName: "yellow_coins_1", recursively: true)!
 		yellow_coins_2 = scene.rootNode.childNode(withName: "yellow_coins_2", recursively: true)!
@@ -178,24 +167,23 @@ class GameViewController: UIViewController
 		
 	}
 	
+	/*
+		This function sets up the sounds for the game. There are no sound effects, but it does
+		allow for other sounds that can run in the background be played while the app is running.
+	*/
 	func setupSounds()
 	{
-//		let background_music = SCNAudioSource(fileNamed: "background.mp3")!
-//		background_music.volume = 0.1
-//		background_music.loops = true
-//		background_music.load()
-//		let music_player = SCNAudioPlayer(source: background_music)
-//		player.addAudioPlayer(music_player)
-		
 		// Let's the user listen to outside audio while the app is playing.
 		try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
 		try? AVAudioSession.sharedInstance().setActive(true)
 	}
 	
 	
+	/*
+		This function allows for pan gestures to be recognized and move the player character.
+	*/
 	@objc func sceneViewPanned(recognizer: UIPanGestureRecognizer)
 	{
-//		print("velocity: \(location)")
 		if !is_paused
 		{
 			let location = recognizer.velocity(in: sceneView)
@@ -212,6 +200,10 @@ class GameViewController: UIViewController
 		}
 	}
 	
+	
+	/*
+		This function starts and runs the countdown at the beginning of the game.
+	*/
 	func startCountdown()
 	{
 		if start_of_game
@@ -230,27 +222,16 @@ class GameViewController: UIViewController
 	}
 	
 	
+	/*
+		All collisions that need to be handled go through this function. Each significant object
+		that collides with the player has a specific event occur that gets triggered first in this
+		function.
+	*/
 	func collisionHandler(player: SCNNode, object: SCNNode)
 	{
 		if object.physicsBody?.categoryBitMask == category_static && !is_paused
 		{
-			if object.name == "jump"
-			{
-				if #available(iOS 11.0, *)
-				{
-					//Modifying y to a lower number makes the player rotate backwards
-					player.runAction(SCNAction.rotateTo(x: 1.5708, y: 1.2, z: 1.5708, duration: 0.1, usesShortestUnitArc: true))
-					player.position.y += 0.1
-				}
-			}
-			else if object.name == "track"
-			{
-				if #available(iOS 11.0, *)
-				{
-					player.runAction(SCNAction.rotateTo(x: 1.5708, y: 1.5708, z: 1.5708, duration: 0.1))
-				}
-			}
-			else if object.name == "tree" && collisions_array["game_over"] == false
+			if object.name == "tree" && collisions_array["game_over"] == false
 			{
 				object.categoryBitMask = -1
 				gameOver()
@@ -260,12 +241,10 @@ class GameViewController: UIViewController
 	
 		if object.physicsBody?.categoryBitMask == category_hidden
 		{
-//			print("Hidden \(String(describing: object.name))")
 			if object.name == "finish_sensor"
 			{
-//				collisions_array[object.name!] = true
 				player.physicsBody?.applyForce(SCNVector3(0, 0, 0), asImpulse: true)
-				player.position = starting_point
+				player.position = STARTING_POINT
 			}
 			else if object.name == "floor" && collisions_array["game_over"] == false && !is_paused
 			{
@@ -273,7 +252,6 @@ class GameViewController: UIViewController
 			}
 			else if object.name == "yellow_coin"
 			{
-//				print("parent: \(object.parent?.parent?.name)")
 				object.parent?.removeFromParentNode()
 				yellowCoinHit()
 			}
@@ -286,13 +264,16 @@ class GameViewController: UIViewController
 	}
 	
 	
+	/*
+		This function updates the collisions array so that each object that is currently being in
+		contact with the player character is being noted and updated.
+	*/
 	func updateCollisions(object: SCNNode)
 	{
 		collisions_array[object.name!] = true
 		if collisions_array["jump_sensor"] == true && collisions_array["clear_sensor"] == true
 		{
 			updateScore()
-//			print("player: \(player.getPlayerPosition().z)")
 			track.loopTrack(track_layer: track_layer)
 			loopObstacles()
 			loopCoins()
@@ -308,34 +289,41 @@ class GameViewController: UIViewController
 	}
 
 	
+	/*
+		This function runs when a yellow coin gets hit and applies the appropriate score to the
+		player.
+	*/
 	func yellowCoinHit()
 	{
 		let coin_timer_end = NSDate.timeIntervalSinceReferenceDate
 		let coin_time_elapsed = coin_timer_end - self.coin_timer_start
-		if coin_time_elapsed > 0.001
+		if coin_time_elapsed > COIN_MINIMUM_HIT_TIME
 		{
-			print("elapsed: \(coin_time_elapsed)")
-//			print("yellow")
 			self.sprite_scene.score += 1
 			self.player.setPlayerCoins(coins: self.player.getPlayerCoins() + 1)
 		}
 		self.coin_timer_start = NSDate.timeIntervalSinceReferenceDate
 	}
 	
+	/*
+		This function runs when a red coin gets hit and applies the appropriate score to the player.
+	*/
 	func redCoinHit()
 	{
 		let coin_timer_end = NSDate.timeIntervalSinceReferenceDate
 		let coin_time_elapsed = coin_timer_end - self.coin_timer_start
-		if coin_time_elapsed > 0.001
+		if coin_time_elapsed > COIN_MINIMUM_HIT_TIME
 		{
-			print("elapsed: \(coin_time_elapsed)")
-//			print("red")
 			self.sprite_scene.score += 5
 			self.player.setPlayerCoins(coins: self.player.getPlayerCoins() + 5)
 		}
 		self.coin_timer_start = NSDate.timeIntervalSinceReferenceDate
 	}
 	
+	/*
+		This function updates the score in the overlay and keeps track of how many different tracks
+		get jumped.
+	*/
 	func updateScore()
 	{
 		self.sprite_scene.score += 2
@@ -346,23 +334,30 @@ class GameViewController: UIViewController
 		}
 	}
 	
+	/*
+		This function gets a random position for each obstacle and changes the angle of it if
+		it is on one of the walls of the track.
+	*/
 	func placeObstacles()
 	{
+		let TRACK_WIDTH: Float = 19.0
+		let SIDE_TREE_ANGLE: Float = 0.45
+		let TRACK_HEIGHT_OFFSET: Float = 6.0
 		for each in obstacle_layer_1.childNodes
 		{
 			each.eulerAngles = SCNVector3(0.0, 0.0, 0.0)
 			var random_position = getTreePositionVector()
-			if random_position.x > 19.0
+			if random_position.x > TRACK_WIDTH
 			{
 				//right side
-				each.eulerAngles.z = 0.45
-				random_position.y = random_position.x.magnitude / 6.0
+				each.eulerAngles.z = SIDE_TREE_ANGLE
+				random_position.y = random_position.x.magnitude / TRACK_HEIGHT_OFFSET
 			}
-			else if random_position.x < -19.0
+			else if random_position.x < -TRACK_WIDTH
 			{
 				//left side
-				each.eulerAngles.z = -0.45
-				random_position.y = random_position.x.magnitude / 6.0
+				each.eulerAngles.z = -SIDE_TREE_ANGLE
+				random_position.y = random_position.x.magnitude / TRACK_HEIGHT_OFFSET
 			}
 		
 			each.position = random_position
@@ -370,8 +365,16 @@ class GameViewController: UIViewController
 		}
 	}
 	
+	
+	/*
+		This function updates the position of each obstacle so they are ready and in position
+		on the next track the player gets to.
+	*/
 	func loopObstacles()
 	{
+		let TRACK_WIDTH: Float = 19.0
+		let SIDE_TREE_ANGLE: Float = 0.45
+		let TRACK_HEIGHT_OFFSET: Float = 6.0
 		var next_looping_layer: SCNNode
 		if jump_count % 2 == 0
 		{
@@ -386,22 +389,28 @@ class GameViewController: UIViewController
 			each.eulerAngles = SCNVector3(0.0, 0.0, 0.0)
 			var random_position = getTreePositionVector()
 			random_position.z -= track.getTrackLength()
-			if random_position.x > 19.0
+			if random_position.x > TRACK_WIDTH
 			{
 				//right side
-				each.eulerAngles.z = 0.45
-				random_position.y = random_position.x.magnitude / 6.0
+				each.eulerAngles.z = SIDE_TREE_ANGLE
+				random_position.y = random_position.x.magnitude / TRACK_HEIGHT_OFFSET
 			}
-			else if random_position.x < -19.0
+			else if random_position.x < -TRACK_WIDTH
 			{
 				//left side
-				each.eulerAngles.z = -0.45
-				random_position.y = random_position.x.magnitude / 6.0
+				each.eulerAngles.z = -SIDE_TREE_ANGLE
+				random_position.y = random_position.x.magnitude / TRACK_HEIGHT_OFFSET
 			}
 			each.position = random_position
 		}
 	}
 	
+	
+	/*
+		This function selects randomized locations and puts them into a single vector that is the
+		new position of the respective tree.
+		@return the vector location of the respective tree
+	*/
 	func getTreePositionVector() -> SCNVector3
 	{
 		let random_x = CGFloat.random(in: -25.0 ... 25.0)
@@ -410,6 +419,10 @@ class GameViewController: UIViewController
 		return SCNVector3(random_x, random_y, random_z)
 	}
 	
+	
+	/*
+		Places the coins in a random location within the limits of the track.
+	*/
 	func placeCoins()
 	{
 		while yellow_coins_1.childNodes.count < number_of_coins
@@ -420,7 +433,6 @@ class GameViewController: UIViewController
 
 		if red_coins_1.childNodes.count < 1
 		{
-//			print("Adding red coin")
 			let red_clone_1 = Coin(coin_node: red_coin_node.clone(), coin_color: "red")
 			red_coins_1.addChildNode(red_clone_1.getCoinNode())
 		}
@@ -436,6 +448,10 @@ class GameViewController: UIViewController
 		}
 	}
 	
+	/*
+		Loops the coins around to the next track so the coins are visible to the player before they
+		get on the next track.
+	*/
 	func loopCoins()
 	{
 		var next_yellow: SCNNode
@@ -476,18 +492,28 @@ class GameViewController: UIViewController
 		}
 	}
 	
+	/*
+		This function takes in a coin and gives it a vector location for it to appear next.
+		@return the vector position of the next coin to appear
+	*/
 	func getCoinPositionVector(coin: Coin) -> SCNVector3
 	{
-		let random_x = CGFloat.random(in: -17.0 ... 17.0)
-		var random_y = CGFloat(3.0)
+		let TRACK_WIDTH: CGFloat = 17.0
+		let COIN_HEIGHT: CGFloat = 3.0
+		let RED_COIN_HEIGHT: CGFloat = 7.0
+		let random_x = CGFloat.random(in: -TRACK_WIDTH ... TRACK_WIDTH)
+		var random_y = COIN_HEIGHT
 		if coin.getCoinColor() == "red"
 		{
-			random_y = CGFloat(7.0)
+			random_y = RED_COIN_HEIGHT
 		}
 		let random_z = CGFloat.random(in: (CGFloat(track.getNextTrackPositionZ() + track.getTrackLength() + track.getObstacleDistanceBuffer())) ... (CGFloat(track.getNextTrackPositionZ() + (track.getTrackLength() * 2) - track.getObstacleDistanceBuffer())))
 		return SCNVector3(random_x, random_y, random_z)
 	}
 	
+	/*
+		This function updates the game difficulty after progressing past certain points.
+	*/
 	func updateLevel()
 	{
 		if player.getPlayerSpeed() < player.getMaxPlayerSpeed()
@@ -500,33 +526,21 @@ class GameViewController: UIViewController
 			track.setTrackLength(track_length: track.getTrackLength() + 30)
 			track.setNextTrackPositionZ(next_track_position_z: track.getNextTrackPositionZ() - 10)
 		}
-		if obstacle_layer_1.childNodes.count <= max_number_of_trees
+		if obstacle_layer_1.childNodes.count <= MAX_NUMBER_OF_TREES
 		{
-			obstacle_layer_1.addChildNode(tree_node.clone())
+			obstacle_layer_1.addChildNode(tree_node.getTreeNode().clone())
 		}
-		
-//		print("speed: \(player.getPlayerSpeed()), track_length: \(track.getTrackLength()), next_track: \(track.getNextTrackPositionZ()), tree_count: \(obstacle_layer_1.childNodes.count)")
 	}
 	
-	deinit
-	{
-		scene.rootNode.cleanup()
-		print("deinit")
-		for each in scene.rootNode.childNodes
-		   {
-			   each.geometry = nil
-			   each.removeFromParentNode()
-		   }
-		print("everything: \(scene.rootNode.childNodes)")
-	}
-	
-	
+	/*
+		This function is called when the game over is triggered. It sees if the score is the
+		new high score and saves the game data to the database.
+	*/
 	func gameOver()
 	{
 		let tree_timer_end = NSDate.timeIntervalSinceReferenceDate
 		let tree_time_elapsed = tree_timer_end - tree_timer_start
 		tree_timer_start = NSDate.timeIntervalSinceReferenceDate
-//		print(tree_time_elapsed)
 		if tree_time_elapsed > 1.0
 		{
 			collisions_array["game_over"] = true
@@ -539,6 +553,9 @@ class GameViewController: UIViewController
 		}
 	}
 	
+	/*
+		This function unpauses everything in the world.
+	*/
 	func unpauseWorld()
 	{
 		print("Unpaused")
@@ -549,25 +566,23 @@ class GameViewController: UIViewController
 		}
 	}
 	
+	/*
+		This functino pauses everything in the world and opens the pause menu.
+	*/
 	func pauseWorld()
 	{
-		print("Paused")
 		if !is_paused
 		{
 			is_paused = true
 			player.getPlayerNode().isPaused = true
 			openPauseMenu()
 		}
-		else
-		{
-			player.setPlayerPosition(position: player.getPlayerPosition())
-			player.setPlayerVelocity(velocity: player.getPlayerVelocity())
-			print("Unpause?")
-			unpauseWorld()
-		}
 	}
 	
 	
+	/*
+		This function changes the view to the pause menu storyboard.
+	*/
 	func openPauseMenu()
 	{
 		let scnStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -580,6 +595,9 @@ class GameViewController: UIViewController
 		present(pause_menu, animated: true, completion: nil)
 	}
 	
+	/*
+		This function changes the view to the game over storyboard.
+	*/
 	func openGameOverMenu()
 	{
 		DispatchQueue.main.async
@@ -594,6 +612,9 @@ class GameViewController: UIViewController
 		
 	}
 	
+	/*
+		This variable indicates the status bar staying visible while the app is open.
+	*/
     override var prefersStatusBarHidden: Bool
 	{
         return false
@@ -602,9 +623,12 @@ class GameViewController: UIViewController
 }
 
 
+/*
+	This class extension sets the GameViewController class  as the renderer delegate so the scene
+	renders in this class.
+*/
 extension GameViewController : SCNSceneRendererDelegate
 {
-	// This render function updates the scene every frame. Try to keep a minimal amount of operations in this function to not overload the CPU.
 	func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
 	{
 		if !self.is_paused
@@ -613,11 +637,14 @@ extension GameViewController : SCNSceneRendererDelegate
 		}
 		
 		player.setPlayerPosition(position: player.getPlayerPosition())
-//		floor.position = SCNVector3(player.getPlayerNode().position.x, floor_depth, player.getPlayerNode().position.z)
 		track.getFloor().position = SCNVector3(player.getPlayerNode().position.x, track.getFloorDepth(), player.getPlayerNode().position.z)
 	}
 }
 
+/*
+	This class extension sets the GameViewController class as the physics contact delegate so it
+	knows whenever there is a collision that needs to be reported.
+*/
 extension GameViewController : SCNPhysicsContactDelegate
 {
 	func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact)
@@ -643,19 +670,6 @@ extension GameViewController : SCNPhysicsContactDelegate
 		
 		updateCollisions(object: contact_node)
 		collisionHandler(player: player, object: contact_node)
-	}
-}
-
-extension SCNNode
-{
-	func cleanup()
-	{
-		for child in childNodes
-		{
-			print(child.name!)
-			child.cleanup()
-		}
-		geometry = nil
 	}
 }
 
