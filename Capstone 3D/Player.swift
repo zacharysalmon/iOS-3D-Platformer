@@ -16,7 +16,7 @@ class Player
 	private let STARTING_PLAYER_SPEED: Float = 1.3
 	private let MAX_PLAYER_SPEED: Float = 3.3
 	private let PLAYER_SPEED_DELTA: CGFloat = 0.0011
-	private let PLAYER_JUMP_HEIGHT: Float = 5.0
+	private let PLAYER_JUMP_HEIGHT: Float = 4.0
 	
 	private var player_node: SCNNode!
 	private var selfie_stick_node: SCNNode!
@@ -170,7 +170,7 @@ class Player
 			
 			self.player_node.physicsBody?.applyForce(SCNVector3(0.0, PLAYER_JUMP_HEIGHT, 0.0), asImpulse: true)
 			
-			let wait_duration = 1.2
+			let wait_duration = 1.0
 			let wait_action = SCNAction.wait(duration: wait_duration)
 			
 			let jump_action = SCNAction.run
